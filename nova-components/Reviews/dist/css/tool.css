@@ -10,9 +10,6 @@
     white-space: nowrap;
     border-width: 0
 }
-.my-component-reviews .invisible {
-    visibility: hidden
-}
 .my-component-reviews .absolute {
     position: absolute
 }
@@ -33,12 +30,6 @@
 }
 .my-component-reviews .left-0 {
     left: 0px
-}
-.my-component-reviews .-bottom-2 {
-    bottom: -0.5rem
-}
-.my-component-reviews .-right-1 {
-    right: -0.25rem
 }
 .my-component-reviews .z-50 {
     z-index: 50
@@ -63,9 +54,6 @@
 .my-component-reviews .ml-4 {
     margin-left: 1rem
 }
-.my-component-reviews .mt-10 {
-    margin-top: 2.5rem
-}
 .my-component-reviews .inline-block {
     display: inline-block
 }
@@ -78,14 +66,17 @@
 .my-component-reviews .grid {
     display: grid
 }
+.my-component-reviews .h-10 {
+    height: 2.5rem
+}
 .my-component-reviews .h-\[30px\] {
     height: 30px
 }
 .my-component-reviews .h-5 {
     height: 1.25rem
 }
-.my-component-reviews .h-10 {
-    height: 2.5rem
+.my-component-reviews .h-\[40px\] {
+    height: 40px
 }
 .my-component-reviews .h-6 {
     height: 1.5rem
@@ -93,23 +84,14 @@
 .my-component-reviews .h-full {
     height: 100%
 }
-.my-component-reviews .h-\[17px\] {
-    height: 17px
-}
-.my-component-reviews .h-\[29px\] {
-    height: 29px
-}
-.my-component-reviews .h-px {
-    height: 1px
-}
-.my-component-reviews .h-\[40px\] {
-    height: 40px
-}
 .my-component-reviews .max-h-96 {
     max-height: 24rem
 }
 .my-component-reviews .w-full {
     width: 100%
+}
+.my-component-reviews .w-10 {
+    width: 2.5rem
 }
 .my-component-reviews .w-5 {
     width: 1.25rem
@@ -123,12 +105,6 @@
 .my-component-reviews .w-\[400px\] {
     width: 400px
 }
-.my-component-reviews .w-10 {
-    width: 2.5rem
-}
-.my-component-reviews .w-80 {
-    width: 20rem
-}
 .my-component-reviews .min-w-full {
     min-width: 100%
 }
@@ -141,14 +117,11 @@
 .my-component-reviews .transform {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
-.my-component-reviews .cursor-pointer {
-    cursor: pointer
-}
 .my-component-reviews .cursor-not-allowed {
     cursor: not-allowed
 }
-.my-component-reviews .grid-cols-7 {
-    grid-template-columns: repeat(7, minmax(0, 1fr))
+.my-component-reviews .cursor-pointer {
+    cursor: pointer
 }
 .my-component-reviews .flex-col {
     flex-direction: column
@@ -185,27 +158,6 @@
     margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(1rem * var(--tw-space-y-reverse))
 }
-.my-component-reviews .space-y-2 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
-}
-.my-component-reviews .divide-y > :not([hidden]) ~ :not([hidden]) {
-    --tw-divide-y-reverse: 0;
-    border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-    border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
-}
-.my-component-reviews .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
-    --tw-divide-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-divide-opacity))
-}
-.my-component-reviews .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
-    --tw-divide-opacity: 1;
-    border-color: rgb(229 231 235 / var(--tw-divide-opacity))
-}
-.my-component-reviews .overflow-hidden {
-    overflow: hidden
-}
 .my-component-reviews .overflow-x-auto {
     overflow-x: auto
 }
@@ -221,14 +173,22 @@
 .my-component-reviews .rounded {
     border-radius: 0.25rem
 }
+.my-component-reviews .rounded-md {
+    border-radius: 0.375rem
+}
 .my-component-reviews .rounded-2xl {
     border-radius: 1rem
 }
 .my-component-reviews .rounded-xl {
     border-radius: 0.75rem
 }
-.my-component-reviews .rounded-md {
-    border-radius: 0.375rem
+.my-component-reviews .rounded-l-\[10px\] {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px
+}
+.my-component-reviews .rounded-r-\[10px\] {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px
 }
 .my-component-reviews .rounded-l-2xl {
     border-top-left-radius: 1rem;
@@ -237,22 +197,6 @@
 .my-component-reviews .rounded-r-2xl {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem
-}
-.my-component-reviews .rounded-l-full {
-    border-top-left-radius: 9999px;
-    border-bottom-left-radius: 9999px
-}
-.my-component-reviews .rounded-r-full {
-    border-top-right-radius: 9999px;
-    border-bottom-right-radius: 9999px
-}
-.my-component-reviews .rounded-r-\[10px\] {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px
-}
-.my-component-reviews .rounded-l-\[10px\] {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px
 }
 .my-component-reviews .border {
     border-width: 1px
@@ -285,58 +229,15 @@
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity))
 }
-.my-component-reviews .bg-\[\#534D41\] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(83 77 65 / var(--tw-bg-opacity))
-}
-.my-component-reviews .bg-\[\#F7CCA3\] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(247 204 163 / var(--tw-bg-opacity))
-}
-.my-component-reviews .bg-\[\#75F0AE\] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 240 174 / var(--tw-bg-opacity))
-}
-.my-component-reviews .bg-\[\#75A0F0\] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 160 240 / var(--tw-bg-opacity))
-}
-.my-component-reviews .bg-opacity-10 {
-    --tw-bg-opacity: 0.1
-}
 .my-component-reviews .p-5 {
     padding: 1.25rem
 }
 .my-component-reviews .p-2 {
     padding: 0.5rem
 }
-.my-component-reviews .px-2 {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem
-}
-.my-component-reviews .px-8 {
-    padding-left: 2rem;
-    padding-right: 2rem
-}
 .my-component-reviews .py-2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem
-}
-.my-component-reviews .px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem
-}
-.my-component-reviews .py-10 {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem
-}
-.my-component-reviews .py-5 {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem
-}
-.my-component-reviews .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem
 }
 .my-component-reviews .py-3\.5 {
     padding-top: 0.875rem;
@@ -354,21 +255,19 @@
     padding-top: 1rem;
     padding-bottom: 1rem
 }
-.my-component-reviews .py-1 {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem
+.my-component-reviews .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+.my-component-reviews .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
 }
 .my-component-reviews .pl-4 {
     padding-left: 1rem
 }
-.my-component-reviews .pl-6 {
-    padding-left: 1.5rem
-}
 .my-component-reviews .pr-3 {
     padding-right: 0.75rem
-}
-.my-component-reviews .pl-20 {
-    padding-left: 5rem
 }
 .my-component-reviews .pl-3 {
     padding-left: 0.75rem
@@ -379,17 +278,11 @@
 .my-component-reviews .pl-5 {
     padding-left: 1.25rem
 }
-.my-component-reviews .pl-10 {
-    padding-left: 2.5rem
-}
 .my-component-reviews .text-left {
     text-align: left
 }
 .my-component-reviews .text-center {
     text-align: center
-}
-.my-component-reviews .text-right {
-    text-align: right
 }
 .my-component-reviews .align-middle {
     vertical-align: middle
@@ -397,9 +290,17 @@
 .my-component-reviews .text-\[22px\] {
     font-size: 22px
 }
+.my-component-reviews .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
 .my-component-reviews .text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem
+}
+.my-component-reviews .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
 }
 .my-component-reviews .text-2xl {
     font-size: 1.5rem;
@@ -409,33 +310,19 @@
     font-size: 1rem;
     line-height: 1.5rem
 }
-.my-component-reviews .text-xs {
-    font-size: 0.75rem;
-    line-height: 1rem
-}
-.my-component-reviews .text-5xl {
-    font-size: 3rem;
-    line-height: 1
-}
-.my-component-reviews .text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem
-}
 .my-component-reviews .font-semibold {
     font-weight: 600
 }
 .my-component-reviews .font-medium {
     font-weight: 500
 }
-.my-component-reviews .font-light {
-    font-weight: 300
-}
-.my-component-reviews .font-bold {
-    font-weight: 700
-}
 .my-component-reviews .text-gray-900 {
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+.my-component-reviews .text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 .my-component-reviews .text-blue-600 {
     --tw-text-opacity: 1;
@@ -448,20 +335,6 @@
 .my-component-reviews .text-blue-500 {
     --tw-text-opacity: 1;
     color: rgb(59 130 246 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-gray-500 {
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-indigo-600 {
-    --tw-text-opacity: 1;
-    color: rgb(79 70 229 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-opacity-75 {
-    --tw-text-opacity: 0.75
-}
-.my-component-reviews .text-opacity-50 {
-    --tw-text-opacity: 0.5
 }
 .my-component-reviews .shadow-md {
     --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -480,16 +353,8 @@
     --tw-bg-opacity: 1;
     background-color: rgb(75 85 99 / var(--tw-bg-opacity))
 }
-.my-component-reviews .hover\:bg-orange-300:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(253 186 116 / var(--tw-bg-opacity))
-}
 .my-component-reviews .hover\:bg-opacity-60:hover {
     --tw-bg-opacity: 0.6
-}
-.my-component-reviews .hover\:text-indigo-900:hover {
-    --tw-text-opacity: 1;
-    color: rgb(49 46 129 / var(--tw-text-opacity))
 }
 .my-component-reviews .hover\:text-opacity-80:hover {
     --tw-text-opacity: 0.8
@@ -558,10 +423,6 @@
         margin-left: -1.5rem;
         margin-right: -1.5rem
     }
-    .my-component-reviews .sm\:px-6 {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem
-    }
     .my-component-reviews .sm\:pl-6 {
         padding-left: 1.5rem
     }
@@ -572,20 +433,6 @@
 @media (min-width: 768px) {
     .my-component-reviews .md\:grid-cols-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
-    .my-component-reviews .md\:flex-row {
-        flex-direction: row
-    }
-    .my-component-reviews .md\:items-center {
-        align-items: center
-    }
-    .my-component-reviews .md\:justify-between {
-        justify-content: space-between
-    }
-    .my-component-reviews .md\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-        margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-        margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
     }
     .my-component-reviews .md\:px-6 {
         padding-left: 1.5rem;
@@ -603,25 +450,8 @@
         margin-left: -2rem;
         margin-right: -2rem
     }
-    .my-component-reviews .lg\:grid-cols-5 {
-        grid-template-columns: repeat(5, minmax(0, 1fr))
-    }
     .my-component-reviews .lg\:grid-cols-4 {
         grid-template-columns: repeat(4, minmax(0, 1fr))
-    }
-    .my-component-reviews .lg\:flex-row {
-        flex-direction: row
-    }
-    .my-component-reviews .lg\:items-center {
-        align-items: center
-    }
-    .my-component-reviews .lg\:justify-between {
-        justify-content: space-between
-    }
-    .my-component-reviews .lg\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-        margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-        margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
     }
     .my-component-reviews .lg\:px-8 {
         padding-left: 2rem;
@@ -629,25 +459,8 @@
     }
 }
 @media (min-width: 1280px) {
-    .my-component-reviews .xl\:grid-cols-7 {
-        grid-template-columns: repeat(7, minmax(0, 1fr))
-    }
     .my-component-reviews .xl\:grid-cols-5 {
         grid-template-columns: repeat(5, minmax(0, 1fr))
-    }
-    .my-component-reviews .xl\:flex-row {
-        flex-direction: row
-    }
-    .my-component-reviews .xl\:items-center {
-        align-items: center
-    }
-    .my-component-reviews .xl\:justify-between {
-        justify-content: space-between
-    }
-    .my-component-reviews .xl\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-        margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-        margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
     }
 }
 @media (min-width: 1536px) {

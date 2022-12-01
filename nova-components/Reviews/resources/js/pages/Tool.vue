@@ -29,18 +29,18 @@
                     </tr>
                   </thead>
                <tbody>
-                  <tr class="w-full rounded-full bg-white" v-for=" n in 2" :key="n">
+                  <tr class="w-full rounded-full bg-white" v-for=" (item,index,key) in convestion" :key="key">
                     <td
                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0 rounded-l-[10px]"
                     >
                         <div class="pl-5">
-                            Monday - 14 / 11 / 22
+                           {{item.appointment_start_date}}
                         </div>
                     </td>
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        <div>Phil Shotton</div>
+                        <div>{{item.patient_first_name + ' ' + item.patient_last_name}}</div>
                     </td>
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
@@ -56,7 +56,7 @@
                             >
                                 <img
                                     class="h-10 w-10 rounded-full"
-                                    src="https://www.gravatar.com/avatar/63b6892f99da435920f976ba551c38c6.jpg?&r=pg&d=identicon&s=190"
+                                    :src="item.practitioner_image"
                                     alt=""
                                 />
                             </div>
@@ -64,7 +64,7 @@
                                 <div
                                     class="text-sm font-medium text-gray-900"
                                 >
-                                    Jane Cooper
+                                    {{item.practitioner_name}}
                                 </div>
                                 <div
                                     class="text-sm text-gray-500"
@@ -170,7 +170,7 @@
 <script>
 import { onMounted, ref } from "vue";
 import Filters from "../components/reviews/filters.vue";
-
+import axios from "axios";
 export default {
     components: {
         Filters,
@@ -178,6 +178,28 @@ export default {
     setup() {
         const observer = ref(null);
         const dark = ref(false);
+        const convestion = ref([]);
+
+        const getConvestion = async () => {
+            axios.defaults.baseURL = "/api/";
+            const response = await axios
+            .get("/convestion")
+            .then((response) => {
+                convestion.value = response.data;
+                console.log(response.data);
+            });
+        }
+        const formateDate = (date) => {
+             let month = date.split("-")[1];
+            let year = date.split("-")[0];
+            let day = date.split("-")[2].split("T")[0];
+            let monthName = new Date(year, month - 1, day).toLocaleString("en-us", {
+                month: "long",
+            });
+            return monthName + " " + day + ", " + year;
+        }
+      
+         
 
         onMounted(() => {
             dark.value = document.documentElement.classList.contains("dark");
@@ -194,10 +216,15 @@ export default {
                 childList: false,
                 characterData: false,
             });
+
+
+            getConvestion();
         });
 
         return {
             dark,
+            convestion,
+            formateDate
         };
     },
 };

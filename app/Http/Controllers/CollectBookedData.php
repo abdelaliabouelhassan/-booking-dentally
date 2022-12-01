@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ConvestionCollection;
 use App\Models\BookedApiRecord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -43,5 +44,15 @@ class CollectBookedData extends Controller
         }else{
             return response()->json(['found' =>  false]);
         }
+    }
+
+
+    public function convestion(){
+        $data = BookedApiRecord::paginate(10);
+        return response()->json(ConvestionCollection::collection($data),200);
+    }
+
+    public function Filter(){
+        
     }
 }

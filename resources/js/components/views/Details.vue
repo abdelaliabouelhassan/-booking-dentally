@@ -561,7 +561,7 @@ export default {
       if(this.store.practitioner.id == 14615){ // dr affan
         min = 15;
       }else if(this.store.practitioner.id == 72952){ //dr joe
-        min = 30;
+        min = 40;
       }
       else{
         min = 20;

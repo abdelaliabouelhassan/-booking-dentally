@@ -6,7 +6,9 @@
         "build-report": "cd nova-components/Report && npm run dev",
         "build-report-prod": "cd nova-components/Report && npm run prod",
         "build-reportlive": "cd nova-components/Reportlive && npm run dev",
-        "build-reportlive-prod": "cd nova-components/Reportlive && npm run prod"
+        "build-reportlive-prod": "cd nova-components/Reportlive && npm run prod",
+        "build-reviews": "cd nova-components/Reviews && npm run dev",
+        "build-reviews-prod": "cd nova-components/Reviews && npm run prod"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.7",

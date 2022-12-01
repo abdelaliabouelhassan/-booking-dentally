@@ -49,7 +49,8 @@
                 }}</span>
               </div>
 
-              <!-- <span
+              <span
+               v-if="Dentist.id == 72952"
                 class="
                   bg-theme-gold
                   text-white
@@ -62,8 +63,9 @@
                   mr-2
                 "
                 >£60</span
-              > -->
+              >
               <span
+              v-else
                 class="
                   bg-theme-gray
                   text-white

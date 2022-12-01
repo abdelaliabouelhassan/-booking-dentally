@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.7",
         "laravel/nova": "~4.0",
         "report/report": "*",
-        "report/reportlive": "*"
+        "report/reportlive": "*",
+        "staff/reviews": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -37,6 +38,10 @@
         {
             "type": "path",
             "url": "./nova-components/Reportlive"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Reviews"
         }
     ],
     "autoload": {

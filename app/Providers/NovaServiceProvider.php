@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Menu\MenuSection;
 use Report\Reportlive\Reportlive;
+use Staff\Reviews\Reviews;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -33,7 +34,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::dashboard(Main::class),
 
                 MenuSection::make('Resources', [
-                    MenuItem::resource(User::class),
                     MenuItem::resource(BookedData::class),
                 ])->icon('document-text')->collapsable(),
 
@@ -42,6 +42,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::make('Report', '/report'),
                     MenuItem::make('Live Reporting', '/reportlive'),
                 ])->icon('chart-bar')->collapsable(),
+
+                MenuSection::make('Staff Management', [
+                    MenuItem::resource(User::class),
+                    MenuItem::make('Reviews', '/reviews'),
+                ])->icon('user')->collapsable(),
 
               
             ];
@@ -98,7 +103,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new Report,
-            new Reportlive
+            new Reportlive,
+            new Reviews,
         ];
     }
 

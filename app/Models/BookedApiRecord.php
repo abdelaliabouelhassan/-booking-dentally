@@ -11,10 +11,9 @@ class BookedApiRecord extends Model
 
     protected $guarded = [];
 
-
-
-
-
+    public function tco(){
+        return $this->belongsTo(User::class, 'tco_id');
+    }
 
 }
 

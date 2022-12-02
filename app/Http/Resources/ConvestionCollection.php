@@ -21,7 +21,8 @@ class ConvestionCollection extends JsonResource
             'patient_first_name'=>$this->patient_first_name,
             'patient_last_name'=>$this->patient_last_name,
             'practitioner_image'=>$this->practitioner_image,
-            'practitioner_name'=>$this->practitioner_name
+            'practitioner_name'=>$this->practitioner_name,
+            'tco'=> $this->tco_id ? $this->tco->name : '-',
         ];
     }
 }

@@ -20,6 +20,7 @@
         <span
             @click="showFilter = !showFilter"
             class="text-xl font-semibold cursor-pointer hover:text-opacity-80 whitespace-nowrap"
+            :class="{'text-red-200':filterd}"
             >{{label}}</span
         >
 
@@ -68,6 +69,10 @@ export default {
             type: String,
             default: "Filter",
         },
+        filterd:{
+            type: Boolean,
+            default: false,
+        }
     },
     setup(props, { emit }) {
         const showFilter = ref(false);

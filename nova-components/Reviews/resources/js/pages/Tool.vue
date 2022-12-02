@@ -7,7 +7,7 @@
                 </h1>
             </div>
             <div class="w-full">
-                <Filters />
+                <Filters @practitioner="getPractitioner" @search="getSearch" @tco="getTCO" @convention="getConvention" @outcome="getOutcome" />
             </div>
              <div class="mt-8 flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -75,7 +75,7 @@
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        Staff Memeber
+                       {{item.tco}}
                     </td>
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
@@ -179,26 +179,45 @@ export default {
         const observer = ref(null);
         const dark = ref(false);
         const convestion = ref([]);
-
+        const practitioner = ref([]);
+        const search = ref("")
+        const TCO =  ref([]);
+        const Outcome = ref([]);
+        const ConventionUser = ref([]);
         const getConvestion = async () => {
             axios.defaults.baseURL = "/api/";
             const response = await axios
-            .get("/convestion")
+            .get(`/convestion?practitioner=${practitioner.value}&search=${search.value}&tco=${TCO.value}&convention_user=${ConventionUser.value}&outcome=${Outcome.value}`)
             .then((response) => {
                 convestion.value = response.data;
                 console.log(response.data);
             });
         }
-        const formateDate = (date) => {
-             let month = date.split("-")[1];
-            let year = date.split("-")[0];
-            let day = date.split("-")[2].split("T")[0];
-            let monthName = new Date(year, month - 1, day).toLocaleString("en-us", {
-                month: "long",
-            });
-            return monthName + " " + day + ", " + year;
+       
+        const getPractitioner = (event) => {
+            practitioner.value = event;
+            getConvestion();
         }
-      
+
+        const getSearch = (event) => {
+            search.value = event;
+            getConvestion();
+        }
+
+        const getTCO = (event) => {
+            TCO.value = event;
+            getConvestion();
+        }
+        const getConvention = (event) => {
+            ConventionUser.value = event;
+            getConvestion();
+        }
+
+        const getOutcome = (event) => {
+            Outcome.value = event;
+            getConvestion();
+        }
+        
          
 
         onMounted(() => {
@@ -224,7 +243,11 @@ export default {
         return {
             dark,
             convestion,
-            formateDate
+            getPractitioner,
+            getSearch,
+            getTCO,
+            getConvention,
+            getOutcome
         };
     },
 };

@@ -34,6 +34,9 @@ return new class extends Migration
             $table->string('patient_postcode');
             $table->string('patient_birthday');
             $table->text('patient_image');
+            $table->bigInteger('tco_id')->unsigned()->nullable();
+            $table->bigInteger('converted_by_id')->unsigned()->nullable();
+            $table->string('outcome',255)->nullable();
             $table->timestamps();
         });
     }

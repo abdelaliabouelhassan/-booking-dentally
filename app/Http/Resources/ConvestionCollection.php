@@ -23,6 +23,8 @@ class ConvestionCollection extends JsonResource
             'practitioner_image'=>$this->practitioner_image,
             'practitioner_name'=>$this->practitioner_name,
             'tco'=> $this->tco_id ? $this->tco->name : '-',
+            'conveted_by'=> $this->converted_by_id ? $this->converted_by->name : '-',
+            'outcome'=> $this->outcome,
         ];
     }
 }

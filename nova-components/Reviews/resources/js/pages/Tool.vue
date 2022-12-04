@@ -7,7 +7,7 @@
                 </h1>
             </div>
             <div class="w-full">
-                <Filters @practitioner="getPractitioner" @search="getSearch" @tco="getTCO" @convention="getConvention" @outcome="getOutcome" />
+                <Filters @practitioner="getPractitioner" @search="getSearch" @tco="getTCO" @convention="getConvention" @outcome="getOutcome" @date="getDate" />
             </div>
              <div class="mt-8 flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -80,7 +80,7 @@
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        Staff Memeber
+                       {{item.conveted_by}}
                     </td>
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
@@ -115,7 +115,7 @@
                                     />
                                 </svg>
                             </div>
-                            <span>Awaiting Treatment</span>
+                            <span>{{item.outcome}}</span>
                         </div>
                     </td>
                     <td
@@ -184,10 +184,12 @@ export default {
         const TCO =  ref([]);
         const Outcome = ref([]);
         const ConventionUser = ref([]);
+        const DateFilter = ref([]);
+        
         const getConvestion = async () => {
             axios.defaults.baseURL = "/api/";
             const response = await axios
-            .get(`/convestion?practitioner=${practitioner.value}&search=${search.value}&tco=${TCO.value}&convention_user=${ConventionUser.value}&outcome=${Outcome.value}`)
+            .get(`/convestion?practitioner=${practitioner.value}&search=${search.value}&tco=${TCO.value}&convention_user=${ConventionUser.value}&outcome=${Outcome.value}&date=${DateFilter.value}`)
             .then((response) => {
                 convestion.value = response.data;
                 console.log(response.data);
@@ -215,6 +217,32 @@ export default {
 
         const getOutcome = (event) => {
             Outcome.value = event;
+            getConvestion();
+        }
+
+           const formatDate = (date) => {
+            const d = new Date(date);
+            let month = "" + (d.getMonth() + 1);
+            let day = "" + d.getDate();
+            const year = d.getFullYear();
+
+            if (month.length < 2) month = "0" + month;
+            if (day.length < 2) day = "0" + day;
+
+            return [year, month, day].join("-");
+             
+        }
+        
+
+        const getDate = (event) => {
+           if(event){
+            let start = formatDate(event[0]);
+            let end = formatDate(event[1]);
+            DateFilter.value = start + "," + end;
+           }else{
+             DateFilter.value = [];
+           }
+           
             getConvestion();
         }
         
@@ -247,7 +275,8 @@ export default {
             getSearch,
             getTCO,
             getConvention,
-            getOutcome
+            getOutcome,
+            getDate
         };
     },
 };

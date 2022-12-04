@@ -15,5 +15,9 @@ class BookedApiRecord extends Model
         return $this->belongsTo(User::class, 'tco_id');
     }
 
+    public function converted_by(){
+        return $this->belongsTo(User::class, 'converted_by_id');
+    }
+
 }
 

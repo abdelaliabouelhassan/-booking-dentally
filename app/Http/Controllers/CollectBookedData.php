@@ -7,6 +7,7 @@ use App\Models\BookedApiRecord;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class CollectBookedData extends Controller
 {
@@ -54,25 +55,42 @@ class CollectBookedData extends Controller
         $tco = $request->tco;
         $convention_user = $request->convention_user;
         $outcome = $request->outcome;
-        $data = BookedApiRecord::where('patient_first_name', 'like', '%' . $search . '%')
-        ->orWhere('practitioner_name', 'like', '%' . $search . '%')
-        ->orWhere('patient_email', 'like', '%' . $search . '%')
-        ->orWhere('patient_phone', 'like', '%' . $search . '%')
-        ->orWhere('treatment_name', 'like', '%' . $search . '%')
-        ->orWhere('practitioner_name', 'like', '%' . $search . '%')
-        ->latest()->get()->when($practitioners, function ($query) use ($practitioners) {
-            return $query->whereIn('practitioner_id', $practitioners);
-        })
-        ->when($tco, function ($query) use ($tco) {
-            return $query->whereIn('tco_id', $tco);
-        })
-        ->when($convention_user, function ($query) use ($convention_user) {
-            return $query->whereIn('converted_by_id', $convention_user);
-        })
-        ->when($outcome, function ($query) use ($outcome) {
-            return $query->whereIn('outcome', $outcome);
-        });
+        $date = $request->date; 
+        if($date){
+            $date = explode(',',$date);
+        }
        
+       
+
+       
+
+        $data = BookedApiRecord::when($search, function (Builder $builder) use ($search) {
+            $builder->where('practitioner_name', 'like', '%' . $search . '%');
+            $builder->orWhere('patient_first_name', 'like', '%' . $search . '%');
+            $builder->orWhere('patient_email', 'like', '%' . $search . '%');
+            $builder->orWhere('patient_phone', 'like', '%' . $search . '%');
+            $builder->orWhere('treatment_name', 'like', '%' . $search . '%');
+            $builder->orWhere('patient_last_name', 'like', '%' . $search . '%');
+        })
+        ->when($practitioners, function (Builder $builder) use ($practitioners) {
+            $builder->where('practitioner_id', $practitioners);
+        })
+        ->when($tco, function (Builder $builder) use ($tco) {
+            $builder->where('tco_id', $tco);
+        })
+        ->when($convention_user, function (Builder $builder) use ($convention_user) {
+            $builder->where('converted_by_id', $convention_user);
+        })
+        ->when($outcome, function (Builder $builder) use ($outcome) {
+            $builder->where('outcome', $outcome);
+        })
+        ->when($date, function (Builder $builder) use ($date) {
+            
+               $builder->whereBetween('appointment_start_date', $date);
+            
+          
+        })
+        ->latest()->paginate(25);
         return response()->json(ConvestionCollection::collection($data),200);
     }
 

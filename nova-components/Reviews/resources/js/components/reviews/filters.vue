@@ -125,7 +125,7 @@
             </Filter>
         </div>
         <div class=" w-full"> 
-            <DateFilter /> 
+            <Datepicker v-model="SelectedDate" range @update:modelValue="handleDate"   /> 
         </div>
         <div class=" w-full">
             <button disabled class=" h-[40px] w-full rounded-md text-center text-xs border border-[#BA812E] text-gray-900 dark:text-gray-300 cursor-not-allowed">
@@ -137,9 +137,10 @@
 
 <script>
 import Filter from "../Tools/filter.vue";
-import DateFilter from "../Tools/DateFilter.vue";
 import axios from "axios";
 import {  ref, watch } from "vue";
+ import Datepicker from '@vuepic/vue-datepicker';
+    import '@vuepic/vue-datepicker/dist/main.css'
 axios.defaults.baseURL = "https://api.dentally.co/v1/";
 axios.defaults.headers.common["Authorization"] =
     "Bearer " + "VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0";
@@ -147,7 +148,7 @@ axios.defaults.headers.common["Authorization"] =
 export default {
     components: {
         Filter,
-        DateFilter,
+        Datepicker,
     },
     setup(props, { emit }) {
         const Practitioners = ref([]);
@@ -187,6 +188,7 @@ export default {
         const SelectedTCO = ref([]);
         const SelectedConvetionUsers = ref([]);
         const SelectedOutcome = ref([]);
+        const SelectedDate = ref([]);
         const Search = ref("");
         const loadPractitioners = async () => {
             const response = await axios
@@ -232,6 +234,8 @@ export default {
         const ClearSelectedOutcome = () => {
             SelectedOutcome.value = [];
         }
+
+     
         
         //watch SelectedPractitioners for changes
         watch(SelectedPractitioners, (newValue, oldValue) => {
@@ -253,6 +257,17 @@ export default {
         watch(SelectedOutcome, (newValue, oldValue) => {
              emit("outcome", newValue);
         });
+        //watch SelectedDate for changes
+        watch(SelectedDate, (newValue, oldValue) => {
+                emit("date", newValue);
+        });
+
+
+        const handleDate = (date) => {
+            if(date == null){
+                emit("date",[]);
+            }
+        }
 
         loadPractitioners();
         loadTCO();
@@ -270,7 +285,9 @@ export default {
             ConvetionUsers,
             SelectedConvetionUsers,
             Outcome,
-            SelectedOutcome
+            SelectedOutcome,
+            SelectedDate,
+            handleDate
         };
     },
 };

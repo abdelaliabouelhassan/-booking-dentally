@@ -22,14 +22,14 @@
 .my-component-reviews .right-10 {
     right: 2.5rem
 }
-.my-component-reviews .top-10 {
-    top: 2.5rem
-}
 .my-component-reviews .top-0 {
     top: 0px
 }
 .my-component-reviews .left-0 {
     left: 0px
+}
+.my-component-reviews .top-10 {
+    top: 2.5rem
 }
 .my-component-reviews .z-50 {
     z-index: 50
@@ -229,10 +229,6 @@
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity))
 }
-.my-component-reviews .bg-red-500 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(239 68 68 / var(--tw-bg-opacity))
-}
 .my-component-reviews .p-5 {
     padding: 1.25rem
 }
@@ -336,13 +332,13 @@
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))
 }
-.my-component-reviews .text-blue-500 {
-    --tw-text-opacity: 1;
-    color: rgb(59 130 246 / var(--tw-text-opacity))
-}
 .my-component-reviews .text-red-200 {
     --tw-text-opacity: 1;
     color: rgb(254 202 202 / var(--tw-text-opacity))
+}
+.my-component-reviews .text-blue-500 {
+    --tw-text-opacity: 1;
+    color: rgb(59 130 246 / var(--tw-text-opacity))
 }
 .my-component-reviews .shadow-md {
     --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);

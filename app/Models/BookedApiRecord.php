@@ -19,5 +19,9 @@ class BookedApiRecord extends Model
         return $this->belongsTo(User::class, 'converted_by_id');
     }
 
+    public function called_by(){
+        return $this->belongsTo(User::class, 'called_day_before_id');
+    }
+
 }
 

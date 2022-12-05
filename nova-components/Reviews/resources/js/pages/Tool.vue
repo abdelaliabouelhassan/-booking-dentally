@@ -45,7 +45,7 @@
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        <div>Staff Memeber</div>
+                        <div>{{item.called_by}}</div>
                     </td>
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
@@ -89,44 +89,20 @@
                             class="flex items-center space-x-2"
                         >
                             <div>
-                                <svg
-                                    width="11"
-                                    height="11"
-                                    viewBox="0 0 11 11"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M5.5 10C7.98528 10 10 7.98528 10 5.5C10 3.01472 7.98528 1 5.5 1C3.01472 1 1 3.01472 1 5.5C1 7.98528 3.01472 10 5.5 10Z"
-                                        fill="#EA8C00"
-                                        stroke="#EA8C00"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                    <path
-                                        d="M6.85 7.30005L5.7637 6.21375C5.59491 6.04501 5.50005 5.81612 5.5 5.57745V2.80005"
-                                        fill="#EA8C00"
-                                    />
-                                    <path
-                                        d="M6.85 7.30005L5.7637 6.21375C5.59491 6.04501 5.50005 5.81612 5.5 5.57745V2.80005"
-                                        stroke="white"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
+                               <outcomeIcon :type="item.outcome" />
                             </div>
-                            <span>{{item.outcome}}</span>
+                            <span>{{item.outcome ?? '-'}}</span>
                         </div>
                     </td>
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        £3,000.00
+                        {{item.value}}
                     </td>
                     <td
                         class="whitespace-nowrap py-4 text-sm text-gray-500 rounded-r-[10px]"
                     >
-                        <button>
+                        <button @click="openAddModal">
                             <svg
                                 width="4"
                                 height="16"
@@ -159,21 +135,26 @@
 
                  <!-- More people... -->
               </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+                </table>
+            </div>
+            </div>
         </div>
     </div>
+    <AddModal ref="addModalRef"/>
+</div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
 import Filters from "../components/reviews/filters.vue";
+import outcomeIcon from "../components/Tools/outcomeIcon.vue"
+import AddModal from "../components/modal/AddModal.vue"
 import axios from "axios";
 export default {
     components: {
         Filters,
+        outcomeIcon,
+        AddModal
     },
     setup() {
         const observer = ref(null);
@@ -185,6 +166,10 @@ export default {
         const Outcome = ref([]);
         const ConventionUser = ref([]);
         const DateFilter = ref([]);
+        const addModalRef = ref(null);
+        const openAddModal = () => {
+            addModalRef.value.openModal();
+        };
         
         const getConvestion = async () => {
             axios.defaults.baseURL = "/api/";
@@ -276,7 +261,9 @@ export default {
             getTCO,
             getConvention,
             getOutcome,
-            getDate
+            getDate,
+            openAddModal,
+            addModalRef
         };
     },
 };

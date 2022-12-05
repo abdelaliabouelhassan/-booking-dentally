@@ -22,9 +22,11 @@ class ConvestionCollection extends JsonResource
             'patient_last_name'=>$this->patient_last_name,
             'practitioner_image'=>$this->practitioner_image,
             'practitioner_name'=>$this->practitioner_name,
-            'tco'=> $this->tco_id ? $this->tco->name : '-',
-            'conveted_by'=> $this->converted_by_id ? $this->converted_by->name : '-',
+            'tco'=> $this->tco_id ? $this->tco->role : 'None',
+            'conveted_by'=> $this->converted_by_id ? $this->converted_by->role : 'None',
             'outcome'=> $this->outcome,
+            'called_by'=> $this->called_day_before_id ? $this->called_by->role : 'None',
+            'value' => $this->value ? '£' .  $this->value : '-',
         ];
     }
 }

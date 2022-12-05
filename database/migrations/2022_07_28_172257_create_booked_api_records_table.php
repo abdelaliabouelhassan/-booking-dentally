@@ -36,7 +36,9 @@ return new class extends Migration
             $table->text('patient_image');
             $table->bigInteger('tco_id')->unsigned()->nullable();
             $table->bigInteger('converted_by_id')->unsigned()->nullable();
+            $table->bigInteger('called_day_before_id')->unsigned()->nullable();
             $table->string('outcome',255)->nullable();
+            $table->float('value')->nullable();
             $table->timestamps();
         });
     }

@@ -69,8 +69,14 @@
 .my-component-reviews .mt-3 {
     margin-top: 0.75rem
 }
+.my-component-reviews .mr-2 {
+    margin-right: 0.5rem
+}
 .my-component-reviews .inline-block {
     display: inline-block
+}
+.my-component-reviews .inline {
+    display: inline
 }
 .my-component-reviews .flex {
     display: flex
@@ -105,11 +111,17 @@
 .my-component-reviews .h-full {
     height: 100%
 }
-.my-component-reviews .max-h-96 {
-    max-height: 24rem
+.my-component-reviews .h-8 {
+    height: 2rem
+}
+.my-component-reviews .h-4 {
+    height: 1rem
 }
 .my-component-reviews .max-h-60 {
     max-height: 15rem
+}
+.my-component-reviews .max-h-96 {
+    max-height: 24rem
 }
 .my-component-reviews .min-h-full {
     min-height: 100%
@@ -129,6 +141,12 @@
 .my-component-reviews .w-\[400px\] {
     width: 400px
 }
+.my-component-reviews .w-8 {
+    width: 2rem
+}
+.my-component-reviews .w-4 {
+    width: 1rem
+}
 .my-component-reviews .min-w-full {
     min-width: 100%
 }
@@ -140,6 +158,14 @@
 }
 .my-component-reviews .transform {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+.my-component-reviews .animate-spin {
+    animation: spin 1s linear infinite
 }
 .my-component-reviews .cursor-not-allowed {
     cursor: not-allowed
@@ -269,6 +295,9 @@
 }
 .my-component-reviews .bg-opacity-75 {
     --tw-bg-opacity: 0.75
+}
+.my-component-reviews .fill-gray-600 {
+    fill: #4b5563
 }
 .my-component-reviews .p-4 {
     padding: 1rem
@@ -416,6 +445,10 @@
     --tw-text-opacity: 1;
     color: rgb(239 68 68 / var(--tw-text-opacity))
 }
+.my-component-reviews .text-gray-200 {
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity))
+}
 .my-component-reviews .shadow-xl {
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -503,6 +536,9 @@
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity))
 }
+.my-component-reviews .dark .dark\:fill-gray-300 {
+    fill: #d1d5db
+}
 .my-component-reviews .dark .dark\:text-gray-300 {
     --tw-text-opacity: 1;
     color: rgb(209 213 219 / var(--tw-text-opacity))
@@ -510,6 +546,10 @@
 .my-component-reviews .dark .dark\:text-gray-100 {
     --tw-text-opacity: 1;
     color: rgb(243 244 246 / var(--tw-text-opacity))
+}
+.my-component-reviews .dark .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 .my-component-reviews .dark .dark\:ring-offset-gray-800 {
     --tw-ring-offset-color: #1f2937

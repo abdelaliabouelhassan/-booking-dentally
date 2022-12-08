@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ConvestionCollection;
 use App\Models\BookedApiRecord;
+use App\Models\Note;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class CollectBookedData extends Controller
 {
@@ -103,6 +105,45 @@ class CollectBookedData extends Controller
     public function getConvetionUsers() {
         $conventionUsers = User::where('role','tco')->orWhere('role','sales')->get();
         return response()->json($conventionUsers,200);
+    }
+
+    public function updateAppointment(Request $request){
+        $request->validate([
+            'tco' => 'required',
+            'outcome' => 'required',
+            'practitioners' => 'required',
+            'called_by' => 'required',
+            'conveted_by' => 'required',
+            'value' => 'required',
+        ]);
+        $id = $request->id;
+        $appointment = BookedApiRecord::findOrfail($id);
+        $appointment->tco_id = $request->tco;
+        $appointment->outcome = $request->outcome;
+        $appointment->practitioner_id = $request->practitioners;
+        $appointment->called_day_before_id = $request->called_by;
+        $appointment->converted_by_id = $request->conveted_by;
+        $appointment->value = $request->value;
+        $appointment->save();
+        return response()->json(['success' => 'Record updated successfully.']);
+    }
+
+    public function createNote(Request $request){
+        $request->validate([
+            'note' => 'required',
+            'booked_api_record_id'=> 'required',
+        ]);
+        $note = new Note();
+        $note->note = $request->note;
+        $note->user_id =  auth()->user()->id;
+        $note->booked_api_record_id = $request->booked_api_record_id;
+        $note->save();
+        return response()->json(['success' => 'Record updated successfully.']);
+    }
+
+    public function loadNotes($id){
+        $notes = Note::where('booked_api_record_id',$id)->with('user')->get();
+        return response()->json($notes,200);
     }
 
    

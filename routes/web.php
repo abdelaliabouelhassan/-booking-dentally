@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CollectBookedData;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
+Route::post('/create-note', [CollectBookedData::class, 'createNote']);
 Route::get('/{any}', function () {
     return view('mainapp');
 })->where('any', '^(?!admin).*$');

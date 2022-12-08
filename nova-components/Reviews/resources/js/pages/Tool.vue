@@ -97,12 +97,12 @@
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        {{item.value}}
+                        {{ item.value ? '£'  + item.value :  '-'}}
                     </td>
                     <td
                         class="whitespace-nowrap py-4 text-sm text-gray-500 rounded-r-[10px]"
                     >
-                        <button @click="openAddModal">
+                        <button @click="openAddModal(item)">
                             <svg
                                 width="4"
                                 height="16"
@@ -140,7 +140,7 @@
             </div>
         </div>
     </div>
-    <AddModal ref="addModalRef"/>
+    <AddModal ref="addModalRef" :selectedAppointment="selectedAppointment" @updateConvestion="getConvestion"/>
 </div>
 </template>
 
@@ -167,7 +167,9 @@ export default {
         const ConventionUser = ref([]);
         const DateFilter = ref([]);
         const addModalRef = ref(null);
-        const openAddModal = () => {
+        const selectedAppointment = ref(null);
+        const openAddModal = (item) => {
+            selectedAppointment.value = item;
             addModalRef.value.openModal();
         };
         
@@ -263,7 +265,9 @@ export default {
             getOutcome,
             getDate,
             openAddModal,
-            addModalRef
+            addModalRef,
+            selectedAppointment,
+            getConvestion
         };
     },
 };

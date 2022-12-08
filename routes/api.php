@@ -26,3 +26,5 @@ Route::get('/convestion',[CollectBookedData::class, 'convestion']);
 
 Route::get('/tco',[CollectBookedData::class, 'getTCO']);
 Route::get('/convetion-users',[CollectBookedData::class, 'getConvetionUsers']);
+Route::post('update-appointment', [CollectBookedData::class, 'updateAppointment']);
+Route::get('/load-notes/{id}', [CollectBookedData::class, 'loadNotes']);

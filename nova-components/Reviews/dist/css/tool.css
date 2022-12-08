@@ -25,6 +25,12 @@
     bottom: 0px;
     left: 0px
 }
+.my-component-reviews .top-5 {
+    top: 1.25rem
+}
+.my-component-reviews .right-5 {
+    right: 1.25rem
+}
 .my-component-reviews .top-10 {
     top: 2.5rem
 }
@@ -34,26 +40,14 @@
 .my-component-reviews .left-0 {
     left: 0px
 }
-.my-component-reviews .right-10 {
-    right: 2.5rem
-}
-.my-component-reviews .top-5 {
-    top: 1.25rem
-}
-.my-component-reviews .right-5 {
-    right: 1.25rem
-}
 .my-component-reviews .z-50 {
     z-index: 50
-}
-.my-component-reviews .z-40 {
-    z-index: 40
 }
 .my-component-reviews .z-10 {
     z-index: 10
 }
-.my-component-reviews .float-right {
-    float: right
+.my-component-reviews .z-40 {
+    z-index: 40
 }
 .my-component-reviews .-my-2 {
     margin-top: -0.5rem;
@@ -63,24 +57,17 @@
     margin-left: -1rem;
     margin-right: -1rem
 }
-.my-component-reviews .mx-auto {
-    margin-left: auto;
-    margin-right: auto
-}
 .my-component-reviews .mt-8 {
     margin-top: 2rem
 }
 .my-component-reviews .ml-4 {
     margin-left: 1rem
 }
-.my-component-reviews .mt-3 {
-    margin-top: 0.75rem
-}
-.my-component-reviews .mt-2 {
-    margin-top: 0.5rem
-}
 .my-component-reviews .mt-5 {
     margin-top: 1.25rem
+}
+.my-component-reviews .mt-3 {
+    margin-top: 0.75rem
 }
 .my-component-reviews .inline-block {
     display: inline-block
@@ -100,6 +87,12 @@
 .my-component-reviews .h-10 {
     height: 2.5rem
 }
+.my-component-reviews .h-6 {
+    height: 1.5rem
+}
+.my-component-reviews .h-11 {
+    height: 2.75rem
+}
 .my-component-reviews .h-\[30px\] {
     height: 30px
 }
@@ -112,20 +105,11 @@
 .my-component-reviews .h-full {
     height: 100%
 }
-.my-component-reviews .h-6 {
-    height: 1.5rem
-}
-.my-component-reviews .h-12 {
-    height: 3rem
-}
-.my-component-reviews .h-14 {
-    height: 3.5rem
-}
-.my-component-reviews .h-11 {
-    height: 2.75rem
-}
 .my-component-reviews .max-h-96 {
     max-height: 24rem
+}
+.my-component-reviews .max-h-60 {
+    max-height: 15rem
 }
 .my-component-reviews .min-h-full {
     min-height: 100%
@@ -136,37 +120,23 @@
 .my-component-reviews .w-10 {
     width: 2.5rem
 }
+.my-component-reviews .w-6 {
+    width: 1.5rem
+}
 .my-component-reviews .w-5 {
     width: 1.25rem
 }
 .my-component-reviews .w-\[400px\] {
     width: 400px
 }
-.my-component-reviews .w-6 {
-    width: 1.5rem
-}
-.my-component-reviews .w-12 {
-    width: 3rem
-}
 .my-component-reviews .min-w-full {
     min-width: 100%
-}
-.my-component-reviews .max-w-sm {
-    max-width: 24rem
 }
 .my-component-reviews .flex-shrink-0 {
     flex-shrink: 0
 }
 .my-component-reviews .border-collapse {
     border-collapse: collapse
-}
-.my-component-reviews .translate-y-4 {
-    --tw-translate-y: 1rem;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-.my-component-reviews .translate-y-0 {
-    --tw-translate-y: 0px;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 .my-component-reviews .transform {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
@@ -176,12 +146,6 @@
 }
 .my-component-reviews .cursor-pointer {
     cursor: pointer
-}
-.my-component-reviews .grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr))
-}
-.my-component-reviews .grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr))
 }
 .my-component-reviews .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr))
@@ -217,11 +181,6 @@
     margin-right: calc(0.5rem * var(--tw-space-x-reverse));
     margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
 }
-.my-component-reviews .space-x-4 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(1rem * var(--tw-space-x-reverse));
-    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
-}
 .my-component-reviews .space-y-4 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -231,6 +190,11 @@
     --tw-space-y-reverse: 0;
     margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+.my-component-reviews .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
 }
 .my-component-reviews .overflow-hidden {
     overflow: hidden
@@ -247,17 +211,17 @@
 .my-component-reviews .rounded-full {
     border-radius: 9999px
 }
-.my-component-reviews .rounded {
-    border-radius: 0.25rem
+.my-component-reviews .rounded-lg {
+    border-radius: 0.5rem
 }
 .my-component-reviews .rounded-md {
     border-radius: 0.375rem
 }
+.my-component-reviews .rounded {
+    border-radius: 0.25rem
+}
 .my-component-reviews .rounded-2xl {
     border-radius: 1rem
-}
-.my-component-reviews .rounded-lg {
-    border-radius: 0.5rem
 }
 .my-component-reviews .rounded-l-\[10px\] {
     border-top-left-radius: 10px;
@@ -267,14 +231,17 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px
 }
-.my-component-reviews .border {
-    border-width: 1px
-}
 .my-component-reviews .border-0 {
     border-width: 0px
 }
+.my-component-reviews .border {
+    border-width: 1px
+}
 .my-component-reviews .border-b-2 {
     border-bottom-width: 2px
+}
+.my-component-reviews .border-transparent {
+    border-color: transparent
 }
 .my-component-reviews .border-gray-300 {
     --tw-border-opacity: 1;
@@ -284,40 +251,33 @@
     --tw-border-opacity: 1;
     border-color: rgb(186 129 46 / var(--tw-border-opacity))
 }
-.my-component-reviews .border-transparent {
-    border-color: transparent
-}
 .my-component-reviews .bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-.my-component-reviews .bg-gray-100 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 .my-component-reviews .bg-gray-500 {
     --tw-bg-opacity: 1;
     background-color: rgb(107 114 128 / var(--tw-bg-opacity))
 }
-.my-component-reviews .bg-green-100 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(220 252 231 / var(--tw-bg-opacity))
-}
 .my-component-reviews .bg-indigo-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(79 70 229 / var(--tw-bg-opacity))
 }
+.my-component-reviews .bg-gray-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
 .my-component-reviews .bg-opacity-75 {
     --tw-bg-opacity: 0.75
+}
+.my-component-reviews .p-4 {
+    padding: 1rem
 }
 .my-component-reviews .p-2 {
     padding: 0.5rem
 }
 .my-component-reviews .p-5 {
     padding: 1.25rem
-}
-.my-component-reviews .p-4 {
-    padding: 1rem
 }
 .my-component-reviews .py-2 {
     padding-top: 0.5rem;
@@ -380,6 +340,14 @@
     font-size: 0.875rem;
     line-height: 1.25rem
 }
+.my-component-reviews .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem
+}
+.my-component-reviews .text-base {
+    font-size: 1rem;
+    line-height: 1.5rem
+}
 .my-component-reviews .text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem
@@ -392,28 +360,17 @@
     font-size: 1.5rem;
     line-height: 2rem
 }
-.my-component-reviews .text-base {
-    font-size: 1rem;
-    line-height: 1.5rem
-}
-.my-component-reviews .text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem
-}
 .my-component-reviews .font-semibold {
     font-weight: 600
 }
 .my-component-reviews .font-medium {
     font-weight: 500
 }
-.my-component-reviews .font-normal {
-    font-weight: 400
-}
 .my-component-reviews .font-bold {
     font-weight: 700
 }
-.my-component-reviews .leading-6 {
-    line-height: 1.5rem
+.my-component-reviews .font-normal {
+    font-weight: 400
 }
 .my-component-reviews .text-gray-900 {
     --tw-text-opacity: 1;
@@ -422,6 +379,18 @@
 .my-component-reviews .text-gray-500 {
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.my-component-reviews .text-black {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+.my-component-reviews .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-reviews .text-gray-700 {
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 .my-component-reviews .text-blue-600 {
     --tw-text-opacity: 1;
@@ -447,33 +416,6 @@
     --tw-text-opacity: 1;
     color: rgb(239 68 68 / var(--tw-text-opacity))
 }
-.my-component-reviews .text-green-600 {
-    --tw-text-opacity: 1;
-    color: rgb(22 163 74 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-gray-700 {
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-black {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-.my-component-reviews .opacity-0 {
-    opacity: 0
-}
-.my-component-reviews .opacity-100 {
-    opacity: 1
-}
-.my-component-reviews .shadow-md {
-    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
 .my-component-reviews .shadow-xl {
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -482,6 +424,11 @@
 .my-component-reviews .shadow-sm {
     --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.my-component-reviews .shadow-md {
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 .my-component-reviews .outline-none {
@@ -498,22 +445,6 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms
 }
-.my-component-reviews .duration-300 {
-    transition-duration: 300ms
-}
-.my-component-reviews .duration-200 {
-    transition-duration: 200ms
-}
-.my-component-reviews .ease-out {
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1)
-}
-.my-component-reviews .ease-in {
-    transition-timing-function: cubic-bezier(0.4, 0, 1, 1)
-}
-.my-component-reviews .hover\:bg-gray-600:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
-}
 .my-component-reviews .hover\:bg-indigo-700:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(67 56 202 / var(--tw-bg-opacity))
@@ -521,6 +452,10 @@
 .my-component-reviews .hover\:bg-gray-50:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.my-component-reviews .hover\:bg-gray-600:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
 }
 .my-component-reviews .hover\:text-red-500:hover {
     --tw-text-opacity: 1;
@@ -541,13 +476,13 @@
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
 }
-.my-component-reviews .focus\:ring-blue-500:focus {
-    --tw-ring-opacity: 1;
-    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity))
-}
 .my-component-reviews .focus\:ring-indigo-500:focus {
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity))
+}
+.my-component-reviews .focus\:ring-blue-500:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity))
 }
 .my-component-reviews .focus\:ring-offset-2:focus {
     --tw-ring-offset-width: 2px
@@ -598,9 +533,6 @@
         margin-top: 2rem;
         margin-bottom: 2rem
     }
-    .my-component-reviews .sm\:mt-5 {
-        margin-top: 1.25rem
-    }
     .my-component-reviews .sm\:mt-6 {
         margin-top: 1.5rem
     }
@@ -613,31 +545,8 @@
     .my-component-reviews .sm\:w-full {
         width: 100%
     }
-    .my-component-reviews .sm\:max-w-lg {
-        max-width: 32rem
-    }
-    .my-component-reviews .sm\:max-w-5xl {
-        max-width: 64rem
-    }
-    .my-component-reviews .sm\:max-w-6xl {
-        max-width: 72rem
-    }
     .my-component-reviews .sm\:max-w-7xl {
         max-width: 80rem
-    }
-    .my-component-reviews .sm\:translate-y-0 {
-        --tw-translate-y: 0px;
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-    }
-    .my-component-reviews .sm\:scale-95 {
-        --tw-scale-x: .95;
-        --tw-scale-y: .95;
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-    }
-    .my-component-reviews .sm\:scale-100 {
-        --tw-scale-x: 1;
-        --tw-scale-y: 1;
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
     }
     .my-component-reviews .sm\:grid-flow-row-dense {
         grid-auto-flow: row dense
@@ -671,9 +580,6 @@
 @media (min-width: 768px) {
     .my-component-reviews .md\:grid-cols-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
-    .my-component-reviews .md\:grid-cols-4 {
-        grid-template-columns: repeat(4, minmax(0, 1fr))
     }
     .my-component-reviews .md\:px-6 {
         padding-left: 1.5rem;

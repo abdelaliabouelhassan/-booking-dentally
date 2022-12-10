@@ -62,9 +62,6 @@ class CollectBookedData extends Controller
             $date = explode(',',$date);
         }
        
-       
-
-       
 
         $data = BookedApiRecord::when($search, function (Builder $builder) use ($search) {
             $builder->where('practitioner_name', 'like', '%' . $search . '%');
@@ -92,8 +89,14 @@ class CollectBookedData extends Controller
             
           
         })
-        ->latest()->paginate(25);
-        return response()->json(ConvestionCollection::collection($data),200);
+        ->latest();
+        $per_page = 25;
+        $total_pages = ceil($data->count()/ $per_page);
+        $data = $data->paginate($per_page);
+        return response()->json([
+            'data' => ConvestionCollection::collection($data),
+            'total' => $total_pages
+        ],200);
     }
 
 

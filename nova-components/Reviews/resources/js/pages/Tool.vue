@@ -138,6 +138,52 @@
                 </table>
             </div>
             </div>
+             <div class="flex flex-1 justify-between sm:justify-end">
+                    <button
+                      href="#"
+                      @click.prevent="PrevPage" 
+                      class="
+                        relative
+                        inline-flex
+                        items-center
+                        rounded-md
+                        border border-gray-300
+                        bg-white
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-gray-700
+                        hover:bg-gray-50
+                        
+                      "
+                      :class="{'cursor-not-allowed':page == 1}"
+                      :disabled="page == 1"
+                      >Previous</button
+                    >
+                    <button
+                      href="#"
+                      @click.prevent="NextPage"
+                      class="
+                        relative
+                        ml-3
+                        inline-flex
+                        items-center
+                        rounded-md
+                        border border-gray-300
+                        bg-white
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-gray-700
+                        hover:bg-gray-50
+                      "
+                      :class="{'cursor-not-allowed':page >= total}"
+                      :disabled="page >= total"
+                      >Next</button
+                    >
+                  </div>
         </div>
     </div>
     <AddModal ref="addModalRef" :selectedAppointment="selectedAppointment" @updateConvestion="getConvestion"/>
@@ -168,6 +214,8 @@ export default {
         const DateFilter = ref([]);
         const addModalRef = ref(null);
         const selectedAppointment = ref(null);
+        const page = ref(1);
+        const total = ref(0);
         const openAddModal = (item) => {
             selectedAppointment.value = item;
             addModalRef.value.openModal();
@@ -176,11 +224,22 @@ export default {
         const getConvestion = async () => {
             axios.defaults.baseURL = "/api/";
             const response = await axios
-            .get(`/convestion?practitioner=${practitioner.value}&search=${search.value}&tco=${TCO.value}&convention_user=${ConventionUser.value}&outcome=${Outcome.value}&date=${DateFilter.value}`)
+            .get(`/convestion?practitioner=${practitioner.value}&search=${search.value}&tco=${TCO.value}&convention_user=${ConventionUser.value}&outcome=${Outcome.value}&date=${DateFilter.value}&page=${page.value}`)
             .then((response) => {
-                convestion.value = response.data;
-                console.log(response.data);
+                convestion.value = response.data.data;
+                total.value = response.data.total;
+                console.log(response);
             });
+        }
+
+        const NextPage = async () => {
+            page.value = page.value + 1;
+            getConvestion();
+        }
+
+        const PrevPage = async () => {
+            page.value = page.value - 1;
+            getConvestion();
         }
        
         const getPractitioner = (event) => {
@@ -267,7 +326,11 @@ export default {
             openAddModal,
             addModalRef,
             selectedAppointment,
-            getConvestion
+            getConvestion,
+            page,
+            total,
+            NextPage,
+            PrevPage
         };
     },
 };

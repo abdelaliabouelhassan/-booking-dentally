@@ -634,6 +634,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var DateFilter = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var addModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var selectedAppointment = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var page = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(1);
+    var total = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     var openAddModal = function openAddModal(item) {
       selectedAppointment.value = item;
       addModalRef.value.openModal();
@@ -647,9 +649,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 axios__WEBPACK_IMPORTED_MODULE_4__["default"].defaults.baseURL = "/api/";
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get("/convestion?practitioner=".concat(practitioner.value, "&search=").concat(search.value, "&tco=").concat(TCO.value, "&convention_user=").concat(ConventionUser.value, "&outcome=").concat(Outcome.value, "&date=").concat(DateFilter.value)).then(function (response) {
-                  convestion.value = response.data;
-                  console.log(response.data);
+                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get("/convestion?practitioner=".concat(practitioner.value, "&search=").concat(search.value, "&tco=").concat(TCO.value, "&convention_user=").concat(ConventionUser.value, "&outcome=").concat(Outcome.value, "&date=").concat(DateFilter.value, "&page=").concat(page.value)).then(function (response) {
+                  convestion.value = response.data.data;
+                  total.value = response.data.total;
+                  console.log(response);
                 });
               case 3:
                 response = _context.sent;
@@ -662,6 +665,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }));
       return function getConvestion() {
         return _ref.apply(this, arguments);
+      };
+    }();
+    var NextPage = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                page.value = page.value + 1;
+                getConvestion();
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+      return function NextPage() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+    var PrevPage = /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                page.value = page.value - 1;
+                getConvestion();
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+      return function PrevPage() {
+        return _ref3.apply(this, arguments);
       };
     }();
     var getPractitioner = function getPractitioner(event) {
@@ -730,7 +771,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       openAddModal: openAddModal,
       addModalRef: addModalRef,
       selectedAppointment: selectedAppointment,
-      getConvestion: getConvestion
+      getConvestion: getConvestion,
+      page: page,
+      total: total,
+      NextPage: NextPage,
+      PrevPage: PrevPage
     };
   }
 });
@@ -1533,6 +1578,11 @@ var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
   })], -1 /* HOISTED */);
 });
 var _hoisted_28 = [_hoisted_27];
+var _hoisted_29 = {
+  "class": "flex flex-1 justify-between sm:justify-end"
+};
+var _hoisted_30 = ["disabled"];
+var _hoisted_31 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Filters = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Filters");
   var _component_outcomeIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("outcomeIcon");
@@ -1564,7 +1614,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return $setup.openAddModal(item);
       }
     }, _hoisted_28, 8 /* PROPS */, _hoisted_26)])]);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" More people... ")])])])])])], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddModal, {
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" More people... ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    href: "#",
+    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.PrevPage && $setup.PrevPage.apply($setup, arguments);
+    }, ["prevent"])),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50", {
+      'cursor-not-allowed': $setup.page == 1
+    }]),
+    disabled: $setup.page == 1
+  }, "Previous", 10 /* CLASS, PROPS */, _hoisted_30), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    href: "#",
+    onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.NextPage && $setup.NextPage.apply($setup, arguments);
+    }, ["prevent"])),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50", {
+      'cursor-not-allowed': $setup.page >= $setup.total
+    }]),
+    disabled: $setup.page >= $setup.total
+  }, "Next", 10 /* CLASS, PROPS */, _hoisted_31)])])], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddModal, {
     ref: "addModalRef",
     selectedAppointment: $setup.selectedAppointment,
     onUpdateConvestion: $setup.getConvestion

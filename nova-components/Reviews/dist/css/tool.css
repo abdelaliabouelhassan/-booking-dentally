@@ -66,11 +66,14 @@
 .my-component-reviews .mt-5 {
     margin-top: 1.25rem
 }
+.my-component-reviews .mr-2 {
+    margin-right: 0.5rem
+}
 .my-component-reviews .mt-3 {
     margin-top: 0.75rem
 }
-.my-component-reviews .mr-2 {
-    margin-right: 0.5rem
+.my-component-reviews .ml-3 {
+    margin-left: 0.75rem
 }
 .my-component-reviews .inline-block {
     display: inline-block
@@ -99,6 +102,9 @@
 .my-component-reviews .h-11 {
     height: 2.75rem
 }
+.my-component-reviews .h-4 {
+    height: 1rem
+}
 .my-component-reviews .h-\[30px\] {
     height: 30px
 }
@@ -110,12 +116,6 @@
 }
 .my-component-reviews .h-full {
     height: 100%
-}
-.my-component-reviews .h-8 {
-    height: 2rem
-}
-.my-component-reviews .h-4 {
-    height: 1rem
 }
 .my-component-reviews .max-h-60 {
     max-height: 15rem
@@ -135,20 +135,20 @@
 .my-component-reviews .w-6 {
     width: 1.5rem
 }
+.my-component-reviews .w-4 {
+    width: 1rem
+}
 .my-component-reviews .w-5 {
     width: 1.25rem
 }
 .my-component-reviews .w-\[400px\] {
     width: 400px
 }
-.my-component-reviews .w-8 {
-    width: 2rem
-}
-.my-component-reviews .w-4 {
-    width: 1rem
-}
 .my-component-reviews .min-w-full {
     min-width: 100%
+}
+.my-component-reviews .flex-1 {
+    flex: 1 1 0%
 }
 .my-component-reviews .flex-shrink-0 {
     flex-shrink: 0
@@ -413,9 +413,17 @@
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity))
 }
+.my-component-reviews .text-red-500 {
+    --tw-text-opacity: 1;
+    color: rgb(239 68 68 / var(--tw-text-opacity))
+}
 .my-component-reviews .text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-reviews .text-gray-200 {
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity))
 }
 .my-component-reviews .text-gray-700 {
     --tw-text-opacity: 1;
@@ -440,14 +448,6 @@
 .my-component-reviews .text-green-400 {
     --tw-text-opacity: 1;
     color: rgb(74 222 128 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-red-500 {
-    --tw-text-opacity: 1;
-    color: rgb(239 68 68 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-gray-200 {
-    --tw-text-opacity: 1;
-    color: rgb(229 231 235 / var(--tw-text-opacity))
 }
 .my-component-reviews .shadow-xl {
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -543,13 +543,13 @@
     --tw-text-opacity: 1;
     color: rgb(209 213 219 / var(--tw-text-opacity))
 }
-.my-component-reviews .dark .dark\:text-gray-100 {
-    --tw-text-opacity: 1;
-    color: rgb(243 244 246 / var(--tw-text-opacity))
-}
 .my-component-reviews .dark .dark\:text-gray-600 {
     --tw-text-opacity: 1;
     color: rgb(75 85 99 / var(--tw-text-opacity))
+}
+.my-component-reviews .dark .dark\:text-gray-100 {
+    --tw-text-opacity: 1;
+    color: rgb(243 244 246 / var(--tw-text-opacity))
 }
 .my-component-reviews .dark .dark\:ring-offset-gray-800 {
     --tw-ring-offset-color: #1f2937
@@ -596,6 +596,9 @@
     }
     .my-component-reviews .sm\:items-center {
         align-items: center
+    }
+    .my-component-reviews .sm\:justify-end {
+        justify-content: flex-end
     }
     .my-component-reviews .sm\:gap-3 {
         gap: 0.75rem

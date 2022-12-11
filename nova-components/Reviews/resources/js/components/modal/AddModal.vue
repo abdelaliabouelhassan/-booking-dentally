@@ -31,8 +31,8 @@
                             >
                             <input
                                 type="text"
-                                class="w-full border-0 border-b-2 outline-none h-11 bg-white"
-                                placeholder="Consultation Date" :value="selectedAppointment ? selectedAppointment.appointment_start_date : ''"
+                                class="w-full border-0 border-b-2 outline-none h-11 bg-white cursor-not-allowed"
+                                placeholder="Consultation Date" :value="formateDate(SelectedDate) ??  ''"
                                 disabled
                             />
                         </div>
@@ -40,9 +40,10 @@
                             <span class="text-black text-base">Value</span>
                             <input
                                 type="text"
-                                class="w-full border-0 border-b-2 outline-none h-11 bg-white"
+                                class="w-full border-0 border-b-2 outline-none h-11 bg-white  cursor-not-allowed"
                                 v-model="SelectedValue"
                                 placeholder="£## ### ##"
+                                disabled
                             />
                             <span class=" text-sm text-red-500" v-if="Errors.value">{{Errors.value[0]   }} </span>
                         </div>
@@ -221,6 +222,7 @@ export default {
         const SelectedCalledBy = ref(null);
         const SelectedValue = ref(null);
         const SelectedNote = ref(null);
+        const SelectedDate = ref(null);
         const Errors = ref([]);
         const Loading = ref(false);
         const LoadingNote = ref(false);
@@ -271,7 +273,7 @@ export default {
         loadTCO();
         loadConvetionUsers();
         
-        
+       
 
       
         watchEffect(() => {
@@ -282,9 +284,9 @@ export default {
                 SelectedConvetionUsers.value = props.selectedAppointment.conveted_by_id;
                 SelectedTCO.value = props.selectedAppointment.tco_id;
                 SelectedPractitioners.value = props.selectedAppointment.practitioner_id;
-                SelectedValue.value = props.selectedAppointment.value;
+              
                 loadNotes();
-                
+                getStats();
             }
         })
 
@@ -305,6 +307,7 @@ export default {
                     tco:SelectedTCO.value,
                     practitioners:SelectedPractitioners.value,
                     value:SelectedValue.value,
+                    start_date:SelectedDate.value,
                 })
                 .then((response) => {
                     console.log(response.data);
@@ -354,6 +357,37 @@ export default {
                 });
         };
 
+         const getStats = async () => {
+            if(props.selectedAppointment){
+                 axios.defaults.baseURL = "https://api.dentally.co/v1/";
+                axios.defaults.headers.common["Authorization"] =
+                "Bearer " + "VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0";
+                const response = await axios
+                    .get(`patients/${props.selectedAppointment.patient_id}/stats/`)
+                    .then((response) => {
+                          SelectedValue.value =  response.data.patient_stat.total_invoiced;
+                          SelectedDate.value =  response.data.patient_stat.first_appointment_date;
+                        console.log(response.data);
+                    });
+            }
+            
+        };
+        
+        const formateDate = (date) => {
+            if(!date){
+                return '';
+            }
+            const d = new Date(date);
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            const hour = String(d.getHours()).padStart(2, '0');
+            const minute = String(d.getMinutes()).padStart(2, '0');
+            const second = String(d.getSeconds()).padStart(2, '0');
+            const HumanDay = d.toLocaleString('default', { weekday: 'short' });
+            return `${HumanDay} ${day}/${month}/${year}`;
+        }
+
         
 
         return {
@@ -370,13 +404,15 @@ export default {
             SelectedOutcome,
             SelectedCalledBy,
             SelectedValue,
+            SelectedDate,
             Notes,
             SelectedNote,
             AddNote,
             UpdateAppointment,
             Errors,
             Loading,
-            LoadingNote
+            LoadingNote,
+            formateDate
         };
     },
 }

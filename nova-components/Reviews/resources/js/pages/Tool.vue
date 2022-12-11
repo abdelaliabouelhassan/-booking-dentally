@@ -97,7 +97,7 @@
                     <td
                         class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
                     >
-                        {{ item.value ? '£'  + item.value :  '-'}}
+                        {{ item.value != null ? '£'  + item.value :  '-'}}
                     </td>
                     <td
                         class="whitespace-nowrap py-4 text-sm text-gray-500 rounded-r-[10px]"

@@ -129,6 +129,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var SelectedCalledBy = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var SelectedValue = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var SelectedNote = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var SelectedDate = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var Errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var Loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var LoadingNote = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
@@ -232,8 +233,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         SelectedConvetionUsers.value = props.selectedAppointment.conveted_by_id;
         SelectedTCO.value = props.selectedAppointment.tco_id;
         SelectedPractitioners.value = props.selectedAppointment.practitioner_id;
-        SelectedValue.value = props.selectedAppointment.value;
         loadNotes();
+        getStats();
       }
     });
     var UpdateAppointment = /*#__PURE__*/function () {
@@ -259,7 +260,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   conveted_by: SelectedConvetionUsers.value,
                   tco: SelectedTCO.value,
                   practitioners: SelectedPractitioners.value,
-                  value: SelectedValue.value
+                  value: SelectedValue.value,
+                  start_date: SelectedDate.value
                 }).then(function (response) {
                   console.log(response.data);
                   open.value = false;
@@ -353,6 +355,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _ref7.apply(this, arguments);
       };
     }();
+    var getStats = /*#__PURE__*/function () {
+      var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                if (!props.selectedAppointment) {
+                  _context7.next = 6;
+                  break;
+                }
+                axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.baseURL = "https://api.dentally.co/v1/";
+                axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorization = "Bearer " + "VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0";
+                _context7.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("patients/".concat(props.selectedAppointment.patient_id, "/stats/")).then(function (response) {
+                  SelectedValue.value = response.data.patient_stat.total_invoiced;
+                  SelectedDate.value = response.data.patient_stat.first_appointment_date;
+                  console.log(response.data);
+                });
+              case 5:
+                response = _context7.sent;
+              case 6:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }));
+      return function getStats() {
+        return _ref8.apply(this, arguments);
+      };
+    }();
+    var formateDate = function formateDate(date) {
+      if (!date) {
+        return '';
+      }
+      var d = new Date(date);
+      var year = d.getFullYear();
+      var month = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      var hour = String(d.getHours()).padStart(2, '0');
+      var minute = String(d.getMinutes()).padStart(2, '0');
+      var second = String(d.getSeconds()).padStart(2, '0');
+      var HumanDay = d.toLocaleString('default', {
+        weekday: 'short'
+      });
+      return "".concat(HumanDay, " ").concat(day, "/").concat(month, "/").concat(year);
+    };
     return {
       open: open,
       openModal: openModal,
@@ -367,13 +417,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       SelectedOutcome: SelectedOutcome,
       SelectedCalledBy: SelectedCalledBy,
       SelectedValue: SelectedValue,
+      SelectedDate: SelectedDate,
       Notes: Notes,
       SelectedNote: SelectedNote,
       AddNote: AddNote,
       UpdateAppointment: UpdateAppointment,
       Errors: Errors,
       Loading: Loading,
-      LoadingNote: LoadingNote
+      LoadingNote: LoadingNote,
+      formateDate: formateDate
     };
   }
 });
@@ -1125,7 +1177,7 @@ var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_51 = [_hoisted_49, _hoisted_50];
 var _hoisted_52 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _$props$selectedAppoi;
+  var _$props$selectedAppoi, _$setup$formateDate;
   return $setup.open ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.closeModal && $setup.closeModal.apply($setup, arguments);
@@ -1133,17 +1185,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "absolute top-5 right-5"
   }, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.selectedAppointment.patient_first_name + ' ' + $props.selectedAppointment.patient_last_name) + " - Dentally Patient ID " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$selectedAppoi = $props.selectedAppointment.patient_id) !== null && _$props$selectedAppoi !== void 0 ? _$props$selectedAppoi : '#####'), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    "class": "w-full border-0 border-b-2 outline-none h-11 bg-white",
+    "class": "w-full border-0 border-b-2 outline-none h-11 bg-white cursor-not-allowed",
     placeholder: "Consultation Date",
-    value: $props.selectedAppointment ? $props.selectedAppointment.appointment_start_date : '',
+    value: (_$setup$formateDate = $setup.formateDate($setup.SelectedDate)) !== null && _$setup$formateDate !== void 0 ? _$setup$formateDate : '',
     disabled: ""
   }, null, 8 /* PROPS */, _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    "class": "w-full border-0 border-b-2 outline-none h-11 bg-white",
+    "class": "w-full border-0 border-b-2 outline-none h-11 bg-white cursor-not-allowed",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.SelectedValue = $event;
     }),
-    placeholder: "£## ### ##"
+    placeholder: "£## ### ##",
+    disabled: ""
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.SelectedValue]]), $setup.Errors.value ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.Errors.value[0]), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     name: "",
     id: "",
@@ -1609,7 +1662,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: ""
     }, null, 8 /* PROPS */, _hoisted_16)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.practitioner_name), 1 /* TEXT */), _hoisted_19])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.tco), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.conveted_by), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_outcomeIcon, {
       type: item.outcome
-    }, null, 8 /* PROPS */, ["type"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_item$outcome = item.outcome) !== null && _item$outcome !== void 0 ? _item$outcome : '-'), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.value ? '£' + item.value : '-'), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, null, 8 /* PROPS */, ["type"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_item$outcome = item.outcome) !== null && _item$outcome !== void 0 ? _item$outcome : '-'), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.value != null ? '£' + item.value : '-'), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: function onClick($event) {
         return $setup.openAddModal(item);
       }

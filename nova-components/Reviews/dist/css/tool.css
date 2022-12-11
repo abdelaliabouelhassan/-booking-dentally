@@ -63,6 +63,9 @@
 .my-component-reviews .ml-4 {
     margin-left: 1rem
 }
+.my-component-reviews .ml-3 {
+    margin-left: 0.75rem
+}
 .my-component-reviews .mt-5 {
     margin-top: 1.25rem
 }
@@ -71,9 +74,6 @@
 }
 .my-component-reviews .mt-3 {
     margin-top: 0.75rem
-}
-.my-component-reviews .ml-3 {
-    margin-left: 0.75rem
 }
 .my-component-reviews .inline-block {
     display: inline-block
@@ -237,11 +237,11 @@
 .my-component-reviews .rounded-full {
     border-radius: 9999px
 }
-.my-component-reviews .rounded-lg {
-    border-radius: 0.5rem
-}
 .my-component-reviews .rounded-md {
     border-radius: 0.375rem
+}
+.my-component-reviews .rounded-lg {
+    border-radius: 0.5rem
 }
 .my-component-reviews .rounded {
     border-radius: 0.25rem
@@ -257,21 +257,21 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px
 }
-.my-component-reviews .border-0 {
-    border-width: 0px
-}
 .my-component-reviews .border {
     border-width: 1px
+}
+.my-component-reviews .border-0 {
+    border-width: 0px
 }
 .my-component-reviews .border-b-2 {
     border-bottom-width: 2px
 }
-.my-component-reviews .border-transparent {
-    border-color: transparent
-}
 .my-component-reviews .border-gray-300 {
     --tw-border-opacity: 1;
     border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+.my-component-reviews .border-transparent {
+    border-color: transparent
 }
 .my-component-reviews .border-\[\#BA812E\] {
     --tw-border-opacity: 1;
@@ -409,6 +409,10 @@
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity))
 }
+.my-component-reviews .text-gray-700 {
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity))
+}
 .my-component-reviews .text-black {
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity))
@@ -424,10 +428,6 @@
 .my-component-reviews .text-gray-200 {
     --tw-text-opacity: 1;
     color: rgb(229 231 235 / var(--tw-text-opacity))
-}
-.my-component-reviews .text-gray-700 {
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 .my-component-reviews .text-blue-600 {
     --tw-text-opacity: 1;
@@ -478,13 +478,13 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms
 }
-.my-component-reviews .hover\:bg-indigo-700:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(67 56 202 / var(--tw-bg-opacity))
-}
 .my-component-reviews .hover\:bg-gray-50:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.my-component-reviews .hover\:bg-indigo-700:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(67 56 202 / var(--tw-bg-opacity))
 }
 .my-component-reviews .hover\:bg-gray-600:hover {
     --tw-bg-opacity: 1;

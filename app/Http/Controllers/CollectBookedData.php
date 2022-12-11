@@ -127,6 +127,9 @@ class CollectBookedData extends Controller
         $appointment->called_day_before_id = $request->called_by;
         $appointment->converted_by_id = $request->conveted_by;
         $appointment->value = $request->value;
+        if($request->start_date){
+            $appointment->appointment_start_date =  Carbon::parse($request->start_date);
+        }
         $appointment->save();
         return response()->json(['success' => 'Record updated successfully.']);
     }

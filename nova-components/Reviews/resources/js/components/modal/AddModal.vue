@@ -40,10 +40,10 @@
                             <span class="text-black text-base">Value</span>
                             <input
                                 type="text"
-                                class="w-full border-0 border-b-2 outline-none h-11 bg-white  cursor-not-allowed"
+                                class="w-full border-0 border-b-2 outline-none h-11 bg-white "
                                 v-model="SelectedValue"
                                 placeholder="£## ### ##"
-                                disabled
+                                
                             />
                             <span class=" text-sm text-red-500" v-if="Errors.value">{{Errors.value[0]   }} </span>
                         </div>
@@ -136,8 +136,8 @@
                     <div class="w-full flex flex-col items-start space-y-4 max-h-60 overflow-y-auto">
                         <div class="flex flex-col items-start space-y-2" v-for="(item,index,key) in Notes" :key="key">
                             <span class="text-black text-sm font-bold"
-                                >Note 10 / 11 / 22 12:22 NAME OF STAFF
-                                MEMBER</span
+                                >Note: {{formateDate(item.created_at)}} - {{item.user.name}} - {{item.user.role}}
+                                </span
                             >
                             <p class="text-base font-normal">
                                 {{item.note}}
@@ -284,7 +284,7 @@ export default {
                 SelectedConvetionUsers.value = props.selectedAppointment.conveted_by_id;
                 SelectedTCO.value = props.selectedAppointment.tco_id;
                 SelectedPractitioners.value = props.selectedAppointment.practitioner_id;
-              
+                SelectedValue.value = props.selectedAppointment.value;
                 loadNotes();
                 getStats();
             }
@@ -365,7 +365,7 @@ export default {
                 const response = await axios
                     .get(`patients/${props.selectedAppointment.patient_id}/stats/`)
                     .then((response) => {
-                          SelectedValue.value =  response.data.patient_stat.total_invoiced;
+                         // SelectedValue.value =  response.data.patient_stat.total_invoiced;
                           SelectedDate.value =  response.data.patient_stat.first_appointment_date;
                         console.log(response.data);
                     });

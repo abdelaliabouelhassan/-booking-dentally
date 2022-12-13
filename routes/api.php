@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CollectBookedData;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,5 @@ Route::get('/tco',[CollectBookedData::class, 'getTCO']);
 Route::get('/convetion-users',[CollectBookedData::class, 'getConvetionUsers']);
 Route::post('update-appointment', [CollectBookedData::class, 'updateAppointment']);
 Route::get('/load-notes/{id}', [CollectBookedData::class, 'loadNotes']);
+
+Route::get('/statistics',[StatisticsController::class, 'Statistics']);

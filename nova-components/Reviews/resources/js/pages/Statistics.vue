@@ -3,7 +3,7 @@
         <div class=" pb-10 w-full flex items-center justify-between">
             <div class="w-full">
                 <h1 class="text-gray-900 dark:text-gray-300 text-[22px]">
-                   Convestion Statistics
+                   Conversion Statistics
                 </h1>
             </div>
             <div>
@@ -17,51 +17,51 @@
                     <div class=" flex flex-col items-start space-y-5">
                         <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">ConsultationS</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.Consultations ?? '00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Cancelled Appointments</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.Cancelled ?? '00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Did not attend</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.DidNotAttend ?? '00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Not Suitable</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.NotSuitable ?? '00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Attended and suitable</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.AttendedAndSuitable ?? '00'}}</span>
                         </div>
                     </div>
                     <div class=" flex flex-col items-start space-y-5">
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Total Number of Converted</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.TotalNumberofConverted ?? '00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Patients Converted on first visit </span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.FirstVisitConverted ?? '00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
-                            <span class=" text-sm text-[#5E5E5E] font-normal">Patients Converted by AftersAles</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">00</span>
+                            <span class=" text-sm text-[#5E5E5E] font-normal">Patients Converted by After Sales</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">{{stats.AfterSalesConverted ?? '00'}}</span>
                         </div>
                     </div>
                     <div class=" flex flex-col items-start space-y-5">
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Total Value of conversions</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">£00,000.00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">£{{stats.TotalValueofConverted ?? '00,000.00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Total Value of TCO conversions</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">£00,000.00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">£{{stats.TotalValueofTCO ?? '00,000.00'}}</span>
                         </div>
                          <div class=" w-full flex justify-between items-center">
                             <span class=" text-sm text-[#5E5E5E] font-normal">Total Value of After Sales conversions</span>
-                            <span class=" text-sm  text-[#BA812E] font-bold">£00,000.00</span>
+                            <span class=" text-sm  text-[#BA812E] font-bold">£{{stats.TotalValueofASC ?? '00,000.00'}}</span>
                         </div>
                     </div>
                 </div>
@@ -90,22 +90,22 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="bg-white ">
+                        <tbody v-if="stats.Conversions">
+                            <tr class="bg-white " v-for="(item,index,key) in stats.Conversions" :key="key">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                  Laura T
+                                  {{item.converted_by_name}}
                                 </th>
                                 <td class="py-4 px-6">
-                                    00
+                                    {{item.patients_seen}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    00
+                                      {{item.patients_converted}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    00.00%
+                                     {{item.conversion_percentage}}%
                                 </td>
                                 <td class="py-4 px-6">
-                                    £00,000.00
+                                    £{{item.conversion_value}}
                                 </td>
                             </tr>
                           
@@ -116,7 +116,7 @@
                                 <td class="py-3 px-6"></td>
                                 <td class="py-3 px-6"></td>
                                 <td class="py-3 px-6"></td>
-                                <td class="py-3 px-6">£21,000</td>
+                                <td class="py-3 px-6">£{{stats.ConversionsTotalValue ?? '00'}}</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -147,22 +147,22 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="bg-white ">
+                         <tbody v-if="stats.ConsultationsByPractitioner">
+                            <tr class="bg-white " v-show="item.practitioner_name != ''" v-for="(item,index,key) in stats.ConsultationsByPractitioner" :key="key">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                  Dr Zeb
+                                  {{item.practitioner_name}}
                                 </th>
                                 <td class="py-4 px-6">
-                                    00
+                                    {{item.patients_seen}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    00
+                                      {{item.patients_converted}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    00.00%
+                                     {{item.conversion_percentage}}%
                                 </td>
                                 <td class="py-4 px-6">
-                                    £00,000.00
+                                    £{{item.conversion_value}}
                                 </td>
                             </tr>
                           
@@ -173,7 +173,7 @@
                                 <td class="py-3 px-6"></td>
                                 <td class="py-3 px-6"></td>
                                 <td class="py-3 px-6"></td>
-                                <td class="py-3 px-6">£21,000</td>
+                                <td class="py-3 px-6">£{{stats.ConsultationsByPractitionerTotalValue ?? '00'}}</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -188,12 +188,47 @@
 import DarkModel from '../components/layouts/darkMode.vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { ref } from 'vue';
+import { ref,onMounted,watch } from 'vue';
+import axios from "axios";
+
 export default {
     setup(){
         const SelectedDate = ref(null);
+        const stats = ref([])
+        const loadStatistics = () => {
+            axios.defaults.baseURL = "/api/";
+             let start = null;
+              let end = null;
+            if(SelectedDate.value != null){
+             start =  formatDate(SelectedDate.value[0])
+             end =  formatDate(SelectedDate.value[1])
+            }
+               
+            axios.get(`/statistics?date=${ start + "," + end}`).then((response) => {
+                console.log(response.data);
+                stats.value = response.data
+            });
+        }
+        watch(SelectedDate, (newValue, oldValue) => {
+           loadStatistics();
+        });
+         const formatDate = (date) => {
+            const d = new Date(date);
+            let month = "" + (d.getMonth() + 1);
+            let day = "" + d.getDate();
+            const year = d.getFullYear();
+
+            if (month.length < 2) month = "0" + month;
+            if (day.length < 2) day = "0" + day;
+
+            return [year, month, day].join("-");
+        };
+        onMounted(() => {
+            loadStatistics();
+        });
         return {
             SelectedDate,
+            stats
         }
     },
     components: {

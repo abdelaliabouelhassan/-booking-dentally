@@ -111,14 +111,14 @@ class CollectBookedData extends Controller
     }
 
     public function updateAppointment(Request $request){
-        $request->validate([
-            'tco' => 'required',
-            'outcome' => 'required',
-            'practitioners' => 'required',
-            'called_by' => 'required',
-            'conveted_by' => 'required',
-            'value' => 'required',
-        ]);
+        // $request->validate([
+        //     'tco' => 'required',
+        //     'outcome' => 'required',
+        //     'practitioners' => 'required',
+        //     'called_by' => 'required',
+        //     'conveted_by' => 'required',
+        //     'value' => 'required',
+        // ]);
         $id = $request->id;
         $appointment = BookedApiRecord::findOrfail($id);
         $appointment->tco_id = $request->tco;

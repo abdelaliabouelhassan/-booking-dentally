@@ -3,7 +3,7 @@
         <div class="w-full space-y-8">
             <div class="w-full">
                 <h1 class="text-gray-900 dark:text-gray-300 text-[22px]">
-                    Convestion Tracking
+                    Conversion Tracking
                 </h1>
             </div>
             <div class="w-full">

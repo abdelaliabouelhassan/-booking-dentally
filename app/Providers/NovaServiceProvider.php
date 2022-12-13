@@ -46,6 +46,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make('Staff Management', [
                     MenuItem::resource(User::class),
                     MenuItem::make('Reviews', '/reviews'),
+                    MenuItem::make('Statistics', '/conversion/statistics'),
                 ])->icon('user')->collapsable(),
 
               

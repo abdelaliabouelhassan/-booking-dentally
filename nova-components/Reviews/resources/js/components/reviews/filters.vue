@@ -125,7 +125,7 @@
             </Filter>
         </div>
         <div class=" w-full"> 
-            <Datepicker v-model="SelectedDate" range @update:modelValue="handleDate"   /> 
+            <Datepicker v-model="SelectedDate" range @update:modelValue="handleDate"  placeholder="Select Date Range" /> 
         </div>
         <div class=" w-full">
             <button disabled class=" h-[40px] w-full rounded-md text-center text-xs border border-[#BA812E] text-gray-900 dark:text-gray-300 cursor-not-allowed">
@@ -139,8 +139,8 @@
 import Filter from "../Tools/filter.vue";
 import axios from "axios";
 import {  ref, watch } from "vue";
- import Datepicker from '@vuepic/vue-datepicker';
-    import '@vuepic/vue-datepicker/dist/main.css'
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 axios.defaults.baseURL = "https://api.dentally.co/v1/";
 axios.defaults.headers.common["Authorization"] =
     "Bearer " + "VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0";

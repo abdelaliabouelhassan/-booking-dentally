@@ -3,10 +3,11 @@
 namespace App\Nova\Metrics;
 
 use App\Models\BookedApiRecord;
+use App\Nova\BookedData;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Metrics\Value;
+use Laravel\Nova\Metrics\Trend;
 
-class newAppointments extends Value
+class AppointmentPerDay extends Trend
 {
     /**
      * Calculate the value of the metric.
@@ -16,7 +17,7 @@ class newAppointments extends Value
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, BookedApiRecord::class);
+        return $this->countByDays($request, BookedApiRecord::class);
     }
 
     /**
@@ -29,11 +30,7 @@ class newAppointments extends Value
         return [
             30 => __('30 Days'),
             60 => __('60 Days'),
-            365 => __('365 Days'),
-            'TODAY' => __('Today'),
-            'MTD' => __('Month To Date'),
-            'QTD' => __('Quarter To Date'),
-            'YTD' => __('Year To Date'),
+            90 => __('90 Days'),
         ];
     }
 
@@ -45,5 +42,15 @@ class newAppointments extends Value
     public function cacheFor()
     {
         // return now()->addMinutes(5);
+    }
+
+    /**
+     * Get the URI key for the metric.
+     *
+     * @return string
+     */
+    public function uriKey()
+    {
+        return 'appointment-per-day';
     }
 }

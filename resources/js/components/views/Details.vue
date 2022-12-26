@@ -321,6 +321,25 @@
               :class="{ 'border-red-500': errors.address }"
             />
           </div>
+            <div class="w-full flex flex-col items-start space-y-1">
+            <span class="text-sm text-[#525252] font-bold">Card Info</span>
+            <div class="w-full flex flex-col items-start space-y-1">
+            <span class="text-xs font-medium text-red-600">{{
+              errors.address
+            }}</span>
+            
+           <div class=" w-full">
+            <div class="form-row w-full">
+            <div id="card-element" class=" w-full">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>        
+            <!-- Used to display form errors. -->
+            <div id="card-errors" role="alert"></div>
+          </div>
+        </div>
+          </div>
+          </div>
+          
         </div>
       </div>
     </template>
@@ -363,6 +382,27 @@ const api = import.meta.env.VITE_APP_DENTALLY_API;
 import MainLayouts from "@/components/layouts/MainLayouts.vue";
 import LoadingSpiner from "@/components/icons/LoadingSpiner.vue";
 import { useStore } from "@/stores/AppointmentStore.js";
+
+const stripe = window.Stripe('pk_test_OsTP2OQAjZTYU4JuxGaYzeyD00v93jobyK');
+var elements = stripe.elements();
+var style = {
+  base: {
+    color: '#32325d',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    },
+    height: '60px'
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};
+var card = elements.create('card', {style: style});
+
 export default {
   components: {
     MainLayouts,
@@ -403,6 +443,8 @@ export default {
       }
     },
     validate() {
+      this.Submit();
+      return;
       this.errors = [];
       var valid = true;
       if (this.store.details.title == "") {
@@ -613,6 +655,30 @@ export default {
           this.sites = response.data;
         });
     },
+    Submit(){
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Inform the user if there was an error.
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          // Send the token to your backend.
+          alert(result.token.id)
+          //this.stripeTokenHandler(result.token);
+        }
+      });
+    },
+    stripeTokenHandler(token) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripeToken');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+
+     alert(token.id)
+    },
   },
   created() {
     this.CheckSteps();
@@ -621,6 +687,19 @@ export default {
     for (let i = 1950; i <= currentYear; i++) {
       this.years.push(i);
     }
+  },
+  mounted() {
+   card.mount('#card-element');
+   // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    
   },
 };
 </script>

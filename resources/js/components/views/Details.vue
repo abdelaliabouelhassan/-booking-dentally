@@ -44,6 +44,20 @@
       </ul>
     </template>
     <template v-slot:body>
+           <div
+                v-if="store.treatments.key == 2"
+                class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base"
+            >
+                Please note there is a consultation fee of £60.00 payable on
+                confirmation of the booking. This amount will be deducted from
+                your final treatment invoice.
+            </div>
+            <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
+                Our Smile Makeover consultations are FREE and your card will not 
+                be charged if you attend your consultation. If you do not attend 
+                your consultation you will be charged a fee of £60.00 unless 
+                cancelled 48 hours prior to the appointment.
+            </div>
       <div class="p-10 space-y-8">
         <h1 class="uppercase font-semibold">Your details</h1>
 
@@ -324,9 +338,7 @@
             <div class="w-full flex flex-col items-start space-y-1">
             <span class="text-sm text-[#525252] font-bold">Card Info</span>
             <div class="w-full flex flex-col items-start space-y-1">
-            <span class="text-xs font-medium text-red-600">{{
-              errors.address
-            }}</span>
+            <span class="text-xs font-medium text-red-600"></span>
             
            <div class=" w-full">
             <div class="form-row w-full">
@@ -334,7 +346,7 @@
               <!-- A Stripe Element will be inserted here. -->
             </div>        
             <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert"></div>
+            <div id="card-errors" role="alert" class="text-red-600"></div>
           </div>
         </div>
           </div>
@@ -383,7 +395,7 @@ import MainLayouts from "@/components/layouts/MainLayouts.vue";
 import LoadingSpiner from "@/components/icons/LoadingSpiner.vue";
 import { useStore } from "@/stores/AppointmentStore.js";
 
-const stripe = window.Stripe('pk_test_OsTP2OQAjZTYU4JuxGaYzeyD00v93jobyK');
+const stripe = window.Stripe(import.meta.env.VITE__PUBLIC_STRIPE_API_KEY);
 var elements = stripe.elements();
 var style = {
   base: {
@@ -443,8 +455,6 @@ export default {
       }
     },
     validate() {
-      this.Submit();
-      return;
       this.errors = [];
       var valid = true;
       if (this.store.details.title == "") {
@@ -496,7 +506,7 @@ export default {
       }
 
      if(valid){
-        this.checkEmailAndPhone();
+        this.Submit();
      }
     },
     clearError() {
@@ -656,28 +666,35 @@ export default {
         });
     },
     Submit(){
+      let vm = this;
+      vm.loading = true;
       stripe.createToken(card).then(function(result) {
         if (result.error) {
           // Inform the user if there was an error.
           var errorElement = document.getElementById('card-errors');
           errorElement.textContent = result.error.message;
+          vm.loading = false;
         } else {
           // Send the token to your backend.
-          alert(result.token.id)
-          //this.stripeTokenHandler(result.token);
+           vm.loading = true;
+           vm.axios.defaults.baseURL = "/api/";
+           vm.axios.post('stripe', {
+            stripeToken: result.token.id,
+            email: vm.store.details.email,
+            name: vm.store.details.first_name + ' ' + vm.store.details.last_name,
+            treatments: vm.store.treatments.key, // 2 = pay 60poound and  and 1 = store card info
+          }).then((response) => {
+            console.log(response.data);
+            vm.loading = false;
+            vm.Confirm();
+          }).catch((error) => {
+            console.log(error.response.data.message);
+            vm.loading = false;
+            alert("Payment failed: " +  error.response.data.message);
+          });
+          
         }
       });
-    },
-    stripeTokenHandler(token) {
-      // Insert the token ID into the form so it gets submitted to the server
-      var form = document.getElementById('payment-form');
-      var hiddenInput = document.createElement('input');
-      hiddenInput.setAttribute('type', 'hidden');
-      hiddenInput.setAttribute('name', 'stripeToken');
-      hiddenInput.setAttribute('value', token.id);
-      form.appendChild(hiddenInput);
-
-     alert(token.id)
     },
   },
   created() {

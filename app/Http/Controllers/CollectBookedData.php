@@ -152,5 +152,49 @@ class CollectBookedData extends Controller
         return response()->json($notes,200);
     }
 
+    public function stripePayment(Request $request){
+        $request->validate([
+            'stripeToken' => 'required',
+            'email' => 'required',
+            'name' => 'required',
+            'treatments'=> 'required',
+        ]);
+        $stripeToken = $request->stripeToken;
+        $email = $request->email;
+        $name = $request->name;
+        $amount = 6000;
+        $currency = 'GBP';
+        $treatments = $request->treatments;
+        $description = 'Payment for '.$name . ' for treatments ' . $treatments == 1 ? 'SMILE MAKEOVER' : 'Implant Consultation';
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_API_KEY'));
+        $customer = \Stripe\Customer::create(array(
+            'email' => $email,
+            'source'  => $stripeToken,
+            'name' => $name,
+            'description' => $description,
+        ));
+        if($treatments == 2){
+            $charge = \Stripe\Charge::create(array(
+                'customer' => $customer->id,
+                'amount'   => $amount,
+                'currency' => $currency,
+                'description' => $description
+            ));
+        }
+
+
+        if($treatments == 2){
+            if($charge->status == 'succeeded'){
+                return response()->json(['success' => 'Payment successfully.'], 200);
+            }else{
+                return response()->json(['error' => 'Payment failed.'], 401);
+            }
+        }else if($treatments == 1){
+            return response()->json(['success' => 'Payment successfully.']);
+        }
+        
+       
+    }
+
    
 }

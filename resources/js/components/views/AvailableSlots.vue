@@ -37,12 +37,12 @@
                 confirmation of the booking. This amount will be deducted from
                 your final treatment invoice.
             </div>
-            <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
+            <!-- <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
                 Our Smile Makeover consultations are FREE and your card will not 
                 be charged if you attend your consultation. If you do not attend 
                 your consultation you will be charged a fee of £60.00 unless 
                 cancelled 48 hours prior to the appointment.
-            </div>
+            </div> -->
             <div v-if="!loading">
                 <div class="p-10">
                     <SlotsTimes

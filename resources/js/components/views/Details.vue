@@ -52,12 +52,12 @@
                 confirmation of the booking. This amount will be deducted from
                 your final treatment invoice.
             </div>
-            <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
+            <!-- <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
                 Our Smile Makeover consultations are FREE and your card will not 
                 be charged if you attend your consultation. If you do not attend 
                 your consultation you will be charged a fee of £60.00 unless 
                 cancelled 48 hours prior to the appointment.
-            </div>
+            </div> -->
       <div class="p-10 space-y-8">
         <h1 class="uppercase font-semibold">Your details</h1>
 
@@ -335,7 +335,7 @@
               :class="{ 'border-red-500': errors.address }"
             />
           </div>
-            <div class="w-full flex flex-col items-start space-y-1">
+            <div class="w-full flex flex-col items-start space-y-1" v-if="store.treatments.key == 2">
             <span class="text-sm text-[#525252] font-bold">Card Info</span>
             <div class="w-full flex flex-col items-start space-y-1">
             <span class="text-xs font-medium text-red-600"></span>
@@ -506,7 +506,7 @@ export default {
       }
 
      if(valid){
-        this.Submit();
+        this.checkEmailAndPhone();
      }
     },
     clearError() {
@@ -549,6 +549,7 @@ export default {
       });
     },
     async checkEmailAndPhone() {
+      this.loading = true;
       this.axios.defaults.baseURL = "/api/";
       await this.axios
         .post("check", {
@@ -556,13 +557,14 @@ export default {
           phone: this.store.details.phone_number,
         })
         .then((response) => {
+          this.loading = false;
           console.log(response.data.found);
           if (response.data.found == true) {
             
             this.$router.push({ name: "already-booked" });
             return false
           } else {
-            this.Confirm();
+            this.Submit();
           }
 
           
@@ -666,35 +668,39 @@ export default {
         });
     },
     Submit(){
-      let vm = this;
-      vm.loading = true;
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error.
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-          vm.loading = false;
-        } else {
-          // Send the token to your backend.
-           vm.loading = true;
-           vm.axios.defaults.baseURL = "/api/";
-           vm.axios.post('stripe', {
-            stripeToken: result.token.id,
-            email: vm.store.details.email,
-            name: vm.store.details.first_name + ' ' + vm.store.details.last_name,
-            treatments: vm.store.treatments.key, // 2 = pay 60poound and  and 1 = store card info
-          }).then((response) => {
-            console.log(response.data);
+      if(this.store.treatments.key == 1){
+        this.Confirm();
+      }else{
+        let vm = this;
+        vm.loading = true;
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
             vm.loading = false;
-            vm.Confirm();
-          }).catch((error) => {
-            console.log(error.response.data.message);
-            vm.loading = false;
-            alert("Payment failed: " +  error.response.data.message);
-          });
-          
-        }
-      });
+          } else {
+            // Send the token to your backend.
+            vm.loading = true;
+            vm.axios.defaults.baseURL = "/api/";
+            vm.axios.post('stripe', {
+              stripeToken: result.token.id,
+              email: vm.store.details.email,
+              name: vm.store.details.first_name + ' ' + vm.store.details.last_name,
+              treatments: vm.store.treatments.key, // 2 = pay 60poound and  and 1 = store card info
+            }).then((response) => {
+              console.log(response.data);
+              vm.loading = false;
+              vm.Confirm();
+            }).catch((error) => {
+              console.log(error.response.data.message);
+              vm.loading = false;
+              alert("Payment failed: " +  error.response.data.message);
+            });
+            
+          }
+        });
+      }
     },
   },
   created() {
@@ -706,17 +712,18 @@ export default {
     }
   },
   mounted() {
-   card.mount('#card-element');
-   // Handle real-time validation errors from the card Element.
-    card.addEventListener('change', function(event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
-      }
-    });
-    
+    if(this.store.treatments.key == 2){
+      card.mount('#card-element');
+      // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+          var displayError = document.getElementById('card-errors');
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = '';
+          }
+        });
+    }
   },
 };
 </script>

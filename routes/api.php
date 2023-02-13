@@ -31,3 +31,5 @@ Route::post('update-appointment', [CollectBookedData::class, 'updateAppointment'
 Route::get('/load-notes/{id}', [CollectBookedData::class, 'loadNotes']);
 
 Route::get('/statistics',[StatisticsController::class, 'Statistics']);
+
+Route::post('/stripe', [CollectBookedData::class, 'stripePayment']);

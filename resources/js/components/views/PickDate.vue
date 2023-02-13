@@ -29,13 +29,19 @@
             </ul>
         </template>
         <template v-slot:body>
-            <div
-                v-if="store.practitioner.id == 72952"
+             <div
+                v-if="store.treatments.key == 2"
                 class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base"
             >
                 Please note there is a consultation fee of £60.00 payable on
                 confirmation of the booking. This amount will be deducted from
                 your final treatment invoice.
+            </div>
+            <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
+                Our Smile Makeover consultations are FREE and your card will not 
+                be charged if you attend your consultation. If you do not attend 
+                your consultation you will be charged a fee of £60.00 unless 
+                cancelled 48 hours prior to the appointment.
             </div>
             <div class="p-10 space-y-8">
                 <h1 class="uppercase font-semibold">Pick a date</h1>
@@ -444,6 +450,9 @@ export default {
             this.end_date.setHours(this.end_date.getHours() + 25);
             let endTimeString = this.end_date.toISOString();
             let duration = this.duration;
+            if(this.store.practitioner.id == 72952){
+                duration = 40;
+            }
             var ids = [this.store.practitioner.id];
             this.axios
                 .get(

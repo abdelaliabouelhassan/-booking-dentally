@@ -44,6 +44,20 @@
       </ul>
     </template>
     <template v-slot:body>
+           <div
+                v-if="store.treatments.key == 2"
+                class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base"
+            >
+                Please note there is a consultation fee of £60.00 payable on
+                confirmation of the booking. This amount will be deducted from
+                your final treatment invoice.
+            </div>
+            <!-- <div  v-if="store.treatments.key == 1" class="w-full bg-[#C3948D] p-5 text-start text-white font-normal text-base">
+                Our Smile Makeover consultations are FREE and your card will not 
+                be charged if you attend your consultation. If you do not attend 
+                your consultation you will be charged a fee of £60.00 unless 
+                cancelled 48 hours prior to the appointment.
+            </div> -->
       <div class="p-10 space-y-8">
         <h1 class="uppercase font-semibold">Your details</h1>
 
@@ -153,7 +167,7 @@
                     hover:border-[#BA812E]
                     focus:border-[#BA812E]
                   "
-                  :class="{ 'border-red-500': errors.day }"
+                  :class="{ 'border-red-500': errors.day || errors.dob }"
                 >
                   <option value="" selected disabled>Day</option>
                   <option :value="item" v-for="item in days" :key="item">
@@ -182,7 +196,7 @@
                     hover:border-[#BA812E]
                     focus:border-[#BA812E]
                   "
-                  :class="{ 'border-red-500': errors.month }"
+                  :class="{ 'border-red-500': errors.month || errors.dob }"
                 >
                   <option value="" selected disabled>Month</option>
                   <option :value="item" v-for="item in months" :key="item">
@@ -211,7 +225,7 @@
                     hover:border-[#BA812E]
                     focus:border-[#BA812E]
                   "
-                  :class="{ 'border-red-500': errors.year }"
+                  :class="{ 'border-red-500': errors.year || errors.dob }"
                 >
                   <option value="" selected disabled>Year</option>
                   <option :value="item" v-for="item in years" :key="item">
@@ -220,6 +234,7 @@
                 </select>
               </div>
             </div>
+            <span class="text-xs font-medium text-red-600">{{errors.dob}}</span>
           </div>
           <div class="w-full flex flex-col items-start space-y-1">
             <span class="text-xs font-medium text-red-600">{{
@@ -321,6 +336,23 @@
               :class="{ 'border-red-500': errors.address }"
             />
           </div>
+            <div class="w-full flex flex-col items-start space-y-1" v-if="store.treatments.key == 2">
+            <span class="text-sm text-[#525252] font-bold">Card Info</span>
+            <div class="w-full flex flex-col items-start space-y-1">
+            <span class="text-xs font-medium text-red-600"></span>
+            
+           <div class=" w-full">
+            <div class="form-row w-full">
+            <div id="card-element" class=" w-full">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>        
+            <!-- Used to display form errors. -->
+            <div id="card-errors" role="alert" class="text-red-600"></div>
+          </div>
+        </div>
+          </div>
+          </div>
+          
         </div>
       </div>
     </template>
@@ -363,6 +395,27 @@ const api = import.meta.env.VITE_APP_DENTALLY_API;
 import MainLayouts from "@/components/layouts/MainLayouts.vue";
 import LoadingSpiner from "@/components/icons/LoadingSpiner.vue";
 import { useStore } from "@/stores/AppointmentStore.js";
+
+const stripe = window.Stripe(import.meta.env.VITE__PUBLIC_STRIPE_API_KEY);
+var elements = stripe.elements();
+var style = {
+  base: {
+    color: '#32325d',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    },
+    height: '60px'
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};
+var card = elements.create('card', {style: style});
+
 export default {
   components: {
     MainLayouts,
@@ -392,6 +445,7 @@ export default {
           day: "",
           month: "",
           year: "",
+          dob: "",
         },
       ],
     };
@@ -453,6 +507,22 @@ export default {
         valid = false;
       }
 
+      let dob = this.store.details.year + "-" + this.store.details.month + "-" + this.store.details.day;
+      //date of birth validation > 18 years
+      var today = new Date();
+      var birthDate = new Date(dob);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      if (age < 18) {
+        this.errors.dob = "You must be 18 years or older to book an appointment";
+        valid = false;
+      }
+
+      
+
      if(valid){
         this.checkEmailAndPhone();
      }
@@ -469,6 +539,7 @@ export default {
           day: "",
           month: "",
           year: "",
+          dob: "",
         },
       ];
     },
@@ -497,6 +568,7 @@ export default {
       });
     },
     async checkEmailAndPhone() {
+      this.loading = true;
       this.axios.defaults.baseURL = "/api/";
       await this.axios
         .post("check", {
@@ -504,13 +576,14 @@ export default {
           phone: this.store.details.phone_number,
         })
         .then((response) => {
+          this.loading = false;
           console.log(response.data.found);
           if (response.data.found == true) {
             
             this.$router.push({ name: "already-booked" });
             return false
           } else {
-            this.Confirm();
+            this.Submit();
           }
 
           
@@ -613,6 +686,41 @@ export default {
           this.sites = response.data;
         });
     },
+    Submit(){
+      if(this.store.treatments.key == 1){
+        this.Confirm();
+      }else{
+        let vm = this;
+        vm.loading = true;
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            vm.loading = false;
+          } else {
+            // Send the token to your backend.
+            vm.loading = true;
+            vm.axios.defaults.baseURL = "/api/";
+            vm.axios.post('stripe', {
+              stripeToken: result.token.id,
+              email: vm.store.details.email,
+              name: vm.store.details.first_name + ' ' + vm.store.details.last_name,
+              treatments: vm.store.treatments.key, // 2 = pay 60poound and  and 1 = store card info
+            }).then((response) => {
+              console.log(response.data);
+              vm.loading = false;
+              vm.Confirm();
+            }).catch((error) => {
+              console.log(error.response.data.message);
+              vm.loading = false;
+              alert("Payment failed: " +  error.response.data.message);
+            });
+            
+          }
+        });
+      }
+    },
   },
   created() {
     this.CheckSteps();
@@ -620,6 +728,20 @@ export default {
     let currentYear = new Date().getFullYear();
     for (let i = 1950; i <= currentYear; i++) {
       this.years.push(i);
+    }
+  },
+  mounted() {
+    if(this.store.treatments.key == 2){
+      card.mount('#card-element');
+      // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+          var displayError = document.getElementById('card-errors');
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = '';
+          }
+        });
     }
   },
 };

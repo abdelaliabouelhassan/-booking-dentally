@@ -167,7 +167,7 @@
                     hover:border-[#BA812E]
                     focus:border-[#BA812E]
                   "
-                  :class="{ 'border-red-500': errors.day }"
+                  :class="{ 'border-red-500': errors.day || errors.dob }"
                 >
                   <option value="" selected disabled>Day</option>
                   <option :value="item" v-for="item in days" :key="item">
@@ -196,7 +196,7 @@
                     hover:border-[#BA812E]
                     focus:border-[#BA812E]
                   "
-                  :class="{ 'border-red-500': errors.month }"
+                  :class="{ 'border-red-500': errors.month || errors.dob }"
                 >
                   <option value="" selected disabled>Month</option>
                   <option :value="item" v-for="item in months" :key="item">
@@ -225,7 +225,7 @@
                     hover:border-[#BA812E]
                     focus:border-[#BA812E]
                   "
-                  :class="{ 'border-red-500': errors.year }"
+                  :class="{ 'border-red-500': errors.year || errors.dob }"
                 >
                   <option value="" selected disabled>Year</option>
                   <option :value="item" v-for="item in years" :key="item">
@@ -234,6 +234,7 @@
                 </select>
               </div>
             </div>
+            <span class="text-xs font-medium text-red-600">{{errors.dob}}</span>
           </div>
           <div class="w-full flex flex-col items-start space-y-1">
             <span class="text-xs font-medium text-red-600">{{
@@ -444,6 +445,7 @@ export default {
           day: "",
           month: "",
           year: "",
+          dob: "",
         },
       ],
     };
@@ -505,6 +507,22 @@ export default {
         valid = false;
       }
 
+      let dob = this.store.details.year + "-" + this.store.details.month + "-" + this.store.details.day;
+      //date of birth validation > 18 years
+      var today = new Date();
+      var birthDate = new Date(dob);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      if (age < 18) {
+        this.errors.dob = "You must be 18 years or older to book an appointment";
+        valid = false;
+      }
+
+      
+
      if(valid){
         this.checkEmailAndPhone();
      }
@@ -521,6 +539,7 @@ export default {
           day: "",
           month: "",
           year: "",
+          dob: "",
         },
       ];
     },

@@ -507,19 +507,19 @@ export default {
         valid = false;
       }
 
-      let dob = this.store.details.year + "-" + this.store.details.month + "-" + this.store.details.day;
-      //date of birth validation > 18 years
-      var today = new Date();
-      var birthDate = new Date(dob);
-      var age = today.getFullYear() - birthDate.getFullYear();
-      var m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      if (age < 18) {
-        this.errors.dob = "You must be 18 years or older to book an appointment";
-        valid = false;
-      }
+      // let dob = this.store.details.year + "-" + this.store.details.month + "-" + this.store.details.day;
+      // //date of birth validation > 18 years
+      // var today = new Date();
+      // var birthDate = new Date(dob);
+      // var age = today.getFullYear() - birthDate.getFullYear();
+      // var m = today.getMonth() - birthDate.getMonth();
+      // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      //   age--;
+      // }
+      // if (age < 18) {
+      //   this.errors.dob = "Unfortunately we’re unable to book consultations for patients under the age of 18. Please get in touch to discuss your treatment options.";
+      //   valid = false;
+      // }
 
       
 

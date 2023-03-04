@@ -369,8 +369,8 @@
           class="border-2 border-theme-gray rounded-full p-4 w-full"
           >Back</a
         >
-        <a
-          href="javascript:void(0)"
+        <button
+         :disabled="loading"
           @click="validate"
           class="
             bg-[#BA812E]
@@ -382,7 +382,7 @@
           "
         >
           <LoadingSpiner v-if="loading" />
-          <span v-else>Confirm and Book</span></a
+          <span v-else>Confirm and Book</span></button
         >
       </div>
     </template>

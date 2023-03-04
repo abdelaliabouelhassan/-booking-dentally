@@ -450,9 +450,15 @@ export default {
             this.end_date.setHours(this.end_date.getHours() + 25);
             let endTimeString = this.end_date.toISOString();
             let duration = this.duration;
-            if(this.store.practitioner.id == 72952){
+             if(this.store.practitioner.id == 14615){ // dr affan
+                duration = 15;
+            }else if(this.store.practitioner.id == 72952){ //dr joe
                 duration = 40;
             }
+            else{
+                duration = 20;
+            }
+            
             var ids = [this.store.practitioner.id];
             this.axios
                 .get(

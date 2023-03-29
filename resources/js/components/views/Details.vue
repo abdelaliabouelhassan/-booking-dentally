@@ -637,7 +637,7 @@ export default {
         min = 40;
       }
       else{
-        min = 20;
+        min = 30;
       }
       var date = new Date(start_date_time);
       date.setMinutes(date.getMinutes() + min);

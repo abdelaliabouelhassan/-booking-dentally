@@ -174,7 +174,7 @@ export default {
                 duration = 40;
             }
             else{
-                duration = 20;
+                duration = 30;
             }
             var ids = [this.store.practitioner.id];
             this.axios
